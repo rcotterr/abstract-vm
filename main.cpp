@@ -1,13 +1,19 @@
 #include <iostream>
 #include <vector>
 
-
 #include "Operand.hpp"
 #include "Operand.cpp"
 
 int main() {
 
-    Operand<int> test = Operand<int>(INTEGER); //TO DO INTEGER instead of int
+    IOperand * test = new Operand<int>(INTEGER); //TO DO INTEGER instead of int
+
+    std::vector< IOperand *> stack; //TO DO INTEGER instead of int
+//    std::vector<Operand<int> > stack; //TO DO INTEGER instead of int
+
+    stack.push_back(test);
+    delete test;
+//
 
 //    enum Type { INTEGER, DOUBLE, /* ... */ };
 //

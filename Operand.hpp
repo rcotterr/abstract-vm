@@ -15,7 +15,7 @@ class Operand : public IOperand
     public:
         Operand();
         Operand(eOperandType type);
-        eOperandType getType() const;
+        eOperandType getType( void ) const;
 //        ~Operand();
 //        Array<T>(unsigned int n) {
 //            this->_len = n;
