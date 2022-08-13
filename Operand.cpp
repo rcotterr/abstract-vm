@@ -7,14 +7,19 @@ Operand<T>::Operand() {
 }
 
 template<typename T>
-Operand<T>::Operand(eOperandType type) {
+Operand<T>::Operand(eOperandType type, std::string const &value) {
     this->_type = type;
-    return;
+    this->_value = &value;
 }
 
 template<typename T>
 eOperandType Operand<T>::getType() const {
     return this->_type;
+}
+
+template<class T>
+IOperand const *Operand<T>::operator+(const IOperand &rhs) const {
+    return nullptr;
 }
 
 

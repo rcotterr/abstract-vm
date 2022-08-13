@@ -12,7 +12,7 @@ class IOperand {
 //        virtual int getPrecision( void ) const = 0;
         virtual eOperandType getType( void ) const = 0;
 
-//        virtual IOperand const * operator+( IOperand const &rhs ) const = 0; // Sum
+        virtual IOperand const * operator+( IOperand const &rhs ) const = 0; // Sum
 //        virtual IOperand const * operator-( IOperand const &rhs ) const = 0; // Difference
 //        virtual IOperand const * operator*( IOperand const &rhs ) const = 0; // Product
 //        virtual IOperand const * operator/( IOperand const &rhs ) const = 0; // Quotient

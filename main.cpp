@@ -13,11 +13,11 @@ int main() {
     std::cout << "factory_method " << factory_test->getType() << std::endl;
     delete factory_test;
 
-    IOperand * test = new Operand<eOperandType>(INT8); //TO DO INTEGER instead of int
-    IOperand * test1 = new Operand<eOperandType>(INT16); //TO DO INTEGER instead of int
-    IOperand * test2 = new Operand<eOperandType>(INT32); //TO DO INTEGER instead of int
-    IOperand * test3 = new Operand<eOperandType>(FLOAT); //TO DO INTEGER instead of int
-    IOperand * test4 = new Operand<eOperandType>(DOUBLE); //TO DO INTEGER instead of int
+    IOperand * test = new Operand<eOperandType>(INT8, "1"); //TO DO INTEGER instead of int
+    IOperand * test1 = new Operand<eOperandType>(INT16, "2"); //TO DO INTEGER instead of int
+    IOperand * test2 = new Operand<eOperandType>(INT32, "3"); //TO DO INTEGER instead of int
+    IOperand * test3 = new Operand<eOperandType>(FLOAT, "4"); //TO DO INTEGER instead of int
+    IOperand * test4 = new Operand<eOperandType>(DOUBLE, "5"); //TO DO INTEGER instead of int
 
     std::vector< IOperand *> stack; //TO DO INTEGER instead of int
 //    std::vector<Operand<int> > stack; //TO DO INTEGER instead of int
