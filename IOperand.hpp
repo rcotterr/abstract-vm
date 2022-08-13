@@ -4,7 +4,7 @@
 #ifndef IOPERAND_HPP
 #define IOPERAND_HPP
 
-enum eOperandType { INTEGER, DOUBLE, /* ... */ };
+enum eOperandType { INT8, INT16, INT32, FLOAT, DOUBLE};
 
 
 class IOperand {

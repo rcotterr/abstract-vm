@@ -2,17 +2,51 @@
 #include <vector>
 
 #include "Operand.hpp"
+#include "Factory.hpp"
+#include "Factory.cpp"
 #include "Operand.cpp"
 
 int main() {
 
-    IOperand * test = new Operand<int>(INTEGER); //TO DO INTEGER instead of int
+    Factory factory = Factory();
+    IOperand const * factory_test = factory.createOperand(INT32, "123");
+    std::cout << "factory_method " << factory_test->getType() << std::endl;
+    delete factory_test;
+
+    IOperand * test = new Operand<eOperandType>(INT8); //TO DO INTEGER instead of int
+    IOperand * test1 = new Operand<eOperandType>(INT16); //TO DO INTEGER instead of int
+    IOperand * test2 = new Operand<eOperandType>(INT32); //TO DO INTEGER instead of int
+    IOperand * test3 = new Operand<eOperandType>(FLOAT); //TO DO INTEGER instead of int
+    IOperand * test4 = new Operand<eOperandType>(DOUBLE); //TO DO INTEGER instead of int
 
     std::vector< IOperand *> stack; //TO DO INTEGER instead of int
 //    std::vector<Operand<int> > stack; //TO DO INTEGER instead of int
 
     stack.push_back(test);
+    stack.push_back(test1);
+    stack.push_back(test2);
+    stack.push_back(test3);
+    stack.push_back(test4);
+    IOperand * testNew = stack.back();
+    std::cout << testNew->getType();
+    stack.pop_back();
+    IOperand * testNew1 = stack.back();
+    std::cout << testNew1->getType();
+    stack.pop_back();
+    IOperand * testNew2 = stack.back();
+    std::cout << testNew2->getType();
+    stack.pop_back();
+    IOperand * testNew3 = stack.back();
+    std::cout << testNew3->getType();
+    stack.pop_back();
+    IOperand * testNew4 = stack.back();
+    std::cout << testNew4->getType();
+    stack.pop_back();
     delete test;
+    delete test1;
+    delete test2;
+    delete test3;
+    delete test4;
 //
 
 //    enum Type { INTEGER, DOUBLE, /* ... */ };
