@@ -19,6 +19,11 @@ int main() {
     IOperand * test3 = new Operand<eOperandType>(FLOAT, "4"); //TO DO INTEGER instead of int
     IOperand * test4 = new Operand<eOperandType>(DOUBLE, "5"); //TO DO INTEGER instead of int
 
+    IOperand const * test_sum = *test1 + *test2;
+    const std::string test_sum_string = test_sum->toString();
+    std::cout << "test sum: " << test_sum_string << std::endl;
+    delete test_sum;
+
     std::vector< IOperand *> stack; //TO DO INTEGER instead of int
 //    std::vector<Operand<int> > stack; //TO DO INTEGER instead of int
 

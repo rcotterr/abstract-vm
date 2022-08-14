@@ -12,12 +12,15 @@ class Operand : public IOperand
     private:
         eOperandType _type;
         std::string const * _value; //TO DO make reference not pointer
+        double _num;
 
     public:
         Operand();
         Operand(eOperandType type, std::string const &value);
         eOperandType getType() const;
+//        double getNum() const;
         IOperand const * operator+( IOperand const &rhs ) const;
+        std::string const & toString() const;
 //        ~Operand();
 //        Array<T>(unsigned int n) {
 //            this->_len = n;
