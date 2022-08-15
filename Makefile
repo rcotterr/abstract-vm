@@ -10,10 +10,10 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(INC)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I /usr/local/include/antlr4-runtime -lantlr
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I /usr/local/include/antlr4-runtime
 
 %.o: %.cpp $(INC)
-	@$(CC) $(CFLAGS) -c $< -o $@ -I /usr/local/include/antlr4-runtime -lantlr
+	@$(CC) $(CFLAGS) -c $< -o $@ -I /usr/local/include/antlr4-runtime
 
 clean:
 	@/bin/rm -f $(OBJS)
