@@ -6,6 +6,10 @@
 #include "Factory.cpp"
 #include "Operand.cpp"
 
+#include "antlr4-runtime.h"
+#include "antlr/grammarVMLexer.h"
+#include "antlr/grammarVMParser.h"
+
 int main() {
 
     Factory factory = Factory();
@@ -66,7 +70,7 @@ int main() {
     std::cout << testNew3->getType();
     stack.pop_back();
     IOperand * testNew4 = stack.back();
-    std::cout << testNew4->getType();
+    std::cout << testNew4->getType() << std::endl;
     stack.pop_back();
     delete test;
     delete test1;
@@ -101,6 +105,22 @@ int main() {
 //    // for (Value i: stack)
 //    //     std::cout << i.data << ' ';
 
+
+// Provide the input text in a stream
+    antlr4::ANTLRInputStream input("pop\nsub\n");
+
+    // Create a lexer from the input
+    grammarVMLexer  lexer(&input);
+
+    // Create a token stream from the lexer
+    antlr4::CommonTokenStream tokens(&lexer);
+
+    // Create a parser from the token stream
+    grammarVMParser parser(&tokens);
+
+    grammarVMParser::ExprContext* expr = parser.expr();
+    // Display the parse tree
+    std::cout << expr->toStringTree() << std::endl;
 
     return 0;
 }
