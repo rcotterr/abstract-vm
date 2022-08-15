@@ -24,6 +24,27 @@ int main() {
     std::cout << "test sum: " << test_sum_string << std::endl;
     delete test_sum;
 
+    IOperand const * test_dif = *test1 - *test2;
+    const std::string test_dif_string = test_dif->toString();
+    std::cout << "test dif: " << test_dif_string << std::endl;
+    delete test_dif;
+
+    IOperand const * test_product = *test1 * *test2;
+    const std::string test_product_string = test_product->toString();
+    std::cout << "test product: " << test_product_string << std::endl;
+    delete test_product;
+
+    IOperand const * test_quotient = *test1 / *test2;
+    const std::string test_quotient_string = test_quotient->toString();
+    std::cout << "test quotient: " << test_quotient_string << std::endl;
+    delete test_quotient;
+
+    IOperand const * test_modulo = *test1 % *test2;
+    const std::string test_modulo_string = test_modulo->toString();
+    std::cout << "test modulo: " << test_modulo_string << std::endl;
+    delete test_modulo;
+
+
     std::vector< IOperand *> stack; //TO DO INTEGER instead of int
 //    std::vector<Operand<int> > stack; //TO DO INTEGER instead of int
 

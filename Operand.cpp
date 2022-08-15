@@ -53,6 +53,107 @@ std::string const &Operand<T>::toString() const {
     return *(this->_value);
 }
 
+template<class T>
+IOperand const *Operand<T>::operator-(const IOperand &rhs) const {
+    std::cout << "- operator called" << std::endl;
+
+    const std::string& rhsStr = rhs.toString();
+    double rhsNum;
+    double num;
+    Operand<eOperandType> const * operand;
+
+    try {
+        rhsNum = std::stod(rhsStr);
+        num = std::stod(this->toString());
+    } catch (const std::invalid_argument &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    } catch (const std::out_of_range &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    }
+
+    operand = new Operand<eOperandType>(DOUBLE, std::to_string(num - rhsNum));
+
+    return operand;
+}
+
+template<class T>
+IOperand const *Operand<T>::operator*(const IOperand &rhs) const {
+    std::cout << "* operator called" << std::endl;
+
+    const std::string& rhsStr = rhs.toString();
+    double rhsNum;
+    double num;
+    Operand<eOperandType> const * operand;
+
+    try {
+        rhsNum = std::stod(rhsStr);
+        num = std::stod(this->toString());
+    } catch (const std::invalid_argument &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    } catch (const std::out_of_range &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    }
+
+    operand = new Operand<eOperandType>(DOUBLE, std::to_string(num * rhsNum));
+
+    return operand;
+}
+
+template<class T>
+IOperand const *Operand<T>::operator/(const IOperand &rhs) const {
+    std::cout << "/ operator called" << std::endl;
+
+    const std::string& rhsStr = rhs.toString();
+    double rhsNum;
+    double num;
+    Operand<eOperandType> const * operand;
+
+    try {
+        rhsNum = std::stod(rhsStr);
+        num = std::stod(this->toString());
+    } catch (const std::invalid_argument &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    } catch (const std::out_of_range &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    }
+
+    operand = new Operand<eOperandType>(DOUBLE, std::to_string(num / rhsNum));
+
+    return operand;
+}
+
+template<class T>
+IOperand const *Operand<T>::operator%(const IOperand &rhs) const {
+    std::cout << "% operator called" << std::endl;
+
+    const std::string& rhsStr = rhs.toString();
+    double rhsNum;
+    double num;
+    Operand<eOperandType> const * operand;
+
+    try {
+        rhsNum = std::stod(rhsStr);
+        num = std::stod(this->toString());
+    } catch (const std::invalid_argument &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    } catch (const std::out_of_range &e) {
+        std::cout << e.what() << std::endl;
+        return nullptr;
+    }
+
+    double res = fmod(num,rhsNum);
+    operand = new Operand<eOperandType>(DOUBLE, std::to_string(res));
+
+    return operand;
+}
+
 //Fixed Fixed::operator+( Fixed const &rhs ) const {
 //    print("+ operator called");
 //

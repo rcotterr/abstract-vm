@@ -20,6 +20,10 @@ class Operand : public IOperand
         eOperandType getType() const;
 //        double getNum() const;
         IOperand const * operator+( IOperand const &rhs ) const;
+        IOperand const * operator-( IOperand const &rhs ) const;
+        IOperand const * operator*( IOperand const &rhs ) const;
+        IOperand const * operator/( IOperand const &rhs ) const;
+        IOperand const * operator%( IOperand const &rhs ) const;
         std::string const & toString() const;
 //        ~Operand();
 //        Array<T>(unsigned int n) {
