@@ -47,25 +47,25 @@ void grammarvmParserInitialize() {
       "prog", "instr"
     },
     std::vector<std::string>{
-      "", "'push'", "'pop'", "'dump'", "'assert'", "'add'", "'sub'", "'mul'", 
-      "'div'", "'mod'", "'print'", "'exit'", "", "'int8'", "'int16'", "'int32'", 
-      "'double'", "'float'", "", "", "", "'('", "')'"
+      "", "'pop'", "'dump'", "'add'", "'sub'", "'mul'", "'div'", "'mod'", 
+      "'print'", "'exit'", "", "", "'int8'", "'int16'", "'int32'", "'double'", 
+      "'float'", "'push'", "'assert'", "", "", "", "'('", "')'"
     },
     std::vector<std::string>{
-      "", "", "", "", "", "", "", "", "", "", "", "", "VALUE", "INT8", "INT16", 
-      "INT32", "DOUBLE", "FLOAT", "N", "Z", "SEP", "OPEN_BRACKET", "CLOSE_BRACKET", 
-      "SINGLE_LINE_COMMENT", "SPACES"
+      "", "", "", "", "", "", "", "", "", "", "CMD_VALUE", "VALUE", "INT8", 
+      "INT16", "INT32", "DOUBLE", "FLOAT", "PUSH", "ASSERT", "N", "Z", "SEP", 
+      "OPEN_BRACKET", "CLOSE_BRACKET", "SINGLE_LINE_COMMENT", "SPACES"
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,24,30,2,0,7,0,2,1,7,1,1,0,1,0,1,0,5,0,8,8,0,10,0,12,0,11,9,0,1,0,
+  	4,1,25,30,2,0,7,0,2,1,7,1,1,0,1,0,1,0,5,0,8,8,0,10,0,12,0,11,9,0,1,0,
   	1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,28,8,1,1,
-  	1,0,0,2,0,2,0,0,38,0,4,1,0,0,0,2,27,1,0,0,0,4,9,3,2,1,0,5,6,5,20,0,0,
+  	1,0,0,2,0,2,0,0,38,0,4,1,0,0,0,2,27,1,0,0,0,4,9,3,2,1,0,5,6,5,21,0,0,
   	6,8,3,2,1,0,7,5,1,0,0,0,8,11,1,0,0,0,9,7,1,0,0,0,9,10,1,0,0,0,10,12,1,
-  	0,0,0,11,9,1,0,0,0,12,13,5,0,0,1,13,1,1,0,0,0,14,15,5,1,0,0,15,28,5,12,
-  	0,0,16,28,5,2,0,0,17,28,5,3,0,0,18,19,5,4,0,0,19,28,5,12,0,0,20,28,5,
-  	5,0,0,21,28,5,6,0,0,22,28,5,7,0,0,23,28,5,8,0,0,24,28,5,9,0,0,25,28,5,
-  	10,0,0,26,28,5,11,0,0,27,14,1,0,0,0,27,16,1,0,0,0,27,17,1,0,0,0,27,18,
+  	0,0,0,11,9,1,0,0,0,12,13,5,0,0,1,13,1,1,0,0,0,14,15,5,10,0,0,15,28,5,
+  	11,0,0,16,28,5,1,0,0,17,28,5,2,0,0,18,19,5,10,0,0,19,28,5,11,0,0,20,28,
+  	5,3,0,0,21,28,5,4,0,0,22,28,5,5,0,0,23,28,5,6,0,0,24,28,5,7,0,0,25,28,
+  	5,8,0,0,26,28,5,9,0,0,27,14,1,0,0,0,27,16,1,0,0,0,27,17,1,0,0,0,27,18,
   	1,0,0,0,27,20,1,0,0,0,27,21,1,0,0,0,27,22,1,0,0,0,27,23,1,0,0,0,27,24,
   	1,0,0,0,27,25,1,0,0,0,27,26,1,0,0,0,28,3,1,0,0,0,2,9,27
   };
@@ -214,6 +214,10 @@ grammarVMParser::InstrContext::InstrContext(ParserRuleContext *parent, size_t in
   : ParserRuleContext(parent, invokingState) {
 }
 
+tree::TerminalNode* grammarVMParser::InstrContext::CMD_VALUE() {
+  return getToken(grammarVMParser::CMD_VALUE, 0);
+}
+
 tree::TerminalNode* grammarVMParser::InstrContext::VALUE() {
   return getToken(grammarVMParser::VALUE, 0);
 }
@@ -257,90 +261,90 @@ grammarVMParser::InstrContext* grammarVMParser::instr() {
   try {
     setState(27);
     _errHandler->sync(this);
-    switch (_input->LA(1)) {
-      case grammarVMParser::T__0: {
-        enterOuterAlt(_localctx, 1);
-        setState(14);
-        match(grammarVMParser::T__0);
-        setState(15);
-        match(grammarVMParser::VALUE);
-        break;
-      }
+    switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 1, _ctx)) {
+    case 1: {
+      enterOuterAlt(_localctx, 1);
+      setState(14);
+      match(grammarVMParser::CMD_VALUE);
+      setState(15);
+      match(grammarVMParser::VALUE);
+      break;
+    }
 
-      case grammarVMParser::T__1: {
-        enterOuterAlt(_localctx, 2);
-        setState(16);
-        match(grammarVMParser::T__1);
-        break;
-      }
+    case 2: {
+      enterOuterAlt(_localctx, 2);
+      setState(16);
+      match(grammarVMParser::T__0);
+      break;
+    }
 
-      case grammarVMParser::T__2: {
-        enterOuterAlt(_localctx, 3);
-        setState(17);
-        match(grammarVMParser::T__2);
-        break;
-      }
+    case 3: {
+      enterOuterAlt(_localctx, 3);
+      setState(17);
+      match(grammarVMParser::T__1);
+      break;
+    }
 
-      case grammarVMParser::T__3: {
-        enterOuterAlt(_localctx, 4);
-        setState(18);
-        match(grammarVMParser::T__3);
-        setState(19);
-        match(grammarVMParser::VALUE);
-        break;
-      }
+    case 4: {
+      enterOuterAlt(_localctx, 4);
+      setState(18);
+      match(grammarVMParser::CMD_VALUE);
+      setState(19);
+      match(grammarVMParser::VALUE);
+      break;
+    }
 
-      case grammarVMParser::T__4: {
-        enterOuterAlt(_localctx, 5);
-        setState(20);
-        match(grammarVMParser::T__4);
-        break;
-      }
+    case 5: {
+      enterOuterAlt(_localctx, 5);
+      setState(20);
+      match(grammarVMParser::T__2);
+      break;
+    }
 
-      case grammarVMParser::T__5: {
-        enterOuterAlt(_localctx, 6);
-        setState(21);
-        match(grammarVMParser::T__5);
-        break;
-      }
+    case 6: {
+      enterOuterAlt(_localctx, 6);
+      setState(21);
+      match(grammarVMParser::T__3);
+      break;
+    }
 
-      case grammarVMParser::T__6: {
-        enterOuterAlt(_localctx, 7);
-        setState(22);
-        match(grammarVMParser::T__6);
-        break;
-      }
+    case 7: {
+      enterOuterAlt(_localctx, 7);
+      setState(22);
+      match(grammarVMParser::T__4);
+      break;
+    }
 
-      case grammarVMParser::T__7: {
-        enterOuterAlt(_localctx, 8);
-        setState(23);
-        match(grammarVMParser::T__7);
-        break;
-      }
+    case 8: {
+      enterOuterAlt(_localctx, 8);
+      setState(23);
+      match(grammarVMParser::T__5);
+      break;
+    }
 
-      case grammarVMParser::T__8: {
-        enterOuterAlt(_localctx, 9);
-        setState(24);
-        match(grammarVMParser::T__8);
-        break;
-      }
+    case 9: {
+      enterOuterAlt(_localctx, 9);
+      setState(24);
+      match(grammarVMParser::T__6);
+      break;
+    }
 
-      case grammarVMParser::T__9: {
-        enterOuterAlt(_localctx, 10);
-        setState(25);
-        match(grammarVMParser::T__9);
-        break;
-      }
+    case 10: {
+      enterOuterAlt(_localctx, 10);
+      setState(25);
+      match(grammarVMParser::T__7);
+      break;
+    }
 
-      case grammarVMParser::T__10: {
-        enterOuterAlt(_localctx, 11);
-        setState(26);
-        match(grammarVMParser::T__10);
-        break;
-      }
+    case 11: {
+      enterOuterAlt(_localctx, 11);
+      setState(26);
+      match(grammarVMParser::T__8);
+      break;
+    }
 
     default:
-      throw NoViableAltException(this);
+      break;
     }
    
   }

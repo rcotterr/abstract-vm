@@ -3,10 +3,10 @@ grammar grammarVM;
 prog : instr (SEP instr)* EOF
     ;
 
-instr : 'push' VALUE
+instr : CMD_VALUE VALUE
     | 'pop'
     | 'dump'
-    | 'assert' VALUE
+    | CMD_VALUE VALUE
     | 'add'
     | 'sub'
     | 'mul'
@@ -15,6 +15,16 @@ instr : 'push' VALUE
     | 'print'
     | 'exit'
     ;
+
+CMD_VALUE :
+    PUSH | ASSERT
+    ;
+
+//CMD : POP
+//    | DUMP
+//    | ADD
+//    |
+//;
 
 VALUE :
     INT8 OPEN_BRACKET N CLOSE_BRACKET
@@ -29,6 +39,9 @@ INT16 : 'int16';
 INT32 : 'int32';
 DOUBLE : 'double';
 FLOAT : 'float';
+
+PUSH : 'push';
+ASSERT : 'assert';
 
 N : [-]?[0-9]+;
 

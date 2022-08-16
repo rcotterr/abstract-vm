@@ -20,16 +20,8 @@ public:
    * Visit parse trees produced by grammarVMParser.
    */
     virtual std::any visitProg(grammarVMParser::ProgContext *context) = 0;
-//    {
-
-//      return nullptr;
-//    };
 
     virtual std::any visitInstr(grammarVMParser::InstrContext *context) = 0;
-//    {
-//
-//        return nullptr;
-//    };
 
 
 };
