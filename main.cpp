@@ -9,6 +9,10 @@
 #include "antlr4-runtime.h"
 #include "antlr/grammarVMLexer.h"
 #include "antlr/grammarVMParser.h"
+//#include "antlr/grammarVMVisitor.h"
+//#include "antlr/grammarVMVisitor.cpp"
+#include "antlr/grammarVMBaseVisitor.cpp"
+//#include "VMVisitor.cpp"
 
 int main() {
 
@@ -107,7 +111,13 @@ int main() {
 
 
 // Provide the input text in a stream
-    antlr4::ANTLRInputStream input("pop\nsub");
+//    antlr4::ANTLRInputStream input("pop\nsub");
+    antlr4::ANTLRInputStream input("push int32(2)\n"
+                                   "push int32(3)\n"
+                                   "add\n"
+                                   "assert int32(5)\n"
+                                   "dump\n"
+                                   "exit");
 
     // Create a lexer from the input
     grammarVMLexer  lexer(&input);
@@ -121,6 +131,17 @@ int main() {
     grammarVMParser::ProgContext* prog = parser.prog();
     // Display the parse tree
     std::cout << prog->toStringTree() << std::endl;
+
+
+//    grammarVMParser::ProgContext* tree = parser.prog();
+//    VMVisitor visitor;
+//    grammarVMVisitor visitor = grammarVMVisitor();
+//    prog->accept(&visitor);
+    grammarVMBaseVisitor visitor;
+    prog->accept(&visitor);
+//    visitor.visit(prog);
+//    Scene scene = visitor.visitFile(tree);
+//    scene.draw();
 
     return 0;
 }

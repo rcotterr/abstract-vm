@@ -3,6 +3,7 @@
 
 
 #include "grammarVMListener.h"
+#include "grammarVMVisitor.h"
 
 #include "grammarVMParser.h"
 
@@ -158,6 +159,14 @@ void grammarVMParser::ProgContext::exitRule(tree::ParseTreeListener *listener) {
     parserListener->exitProg(this);
 }
 
+
+std::any grammarVMParser::ProgContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<grammarVMVisitor*>(visitor))
+    return parserVisitor->visitProg(this);
+  else
+    return visitor->visitChildren(this);
+}
+
 grammarVMParser::ProgContext* grammarVMParser::prog() {
   ProgContext *_localctx = _tracker.createInstance<ProgContext>(_ctx, getState());
   enterRule(_localctx, 0, grammarVMParser::RuleProg);
@@ -224,6 +233,14 @@ void grammarVMParser::InstrContext::exitRule(tree::ParseTreeListener *listener) 
   auto parserListener = dynamic_cast<grammarVMListener *>(listener);
   if (parserListener != nullptr)
     parserListener->exitInstr(this);
+}
+
+
+std::any grammarVMParser::InstrContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<grammarVMVisitor*>(visitor))
+    return parserVisitor->visitInstr(this);
+  else
+    return visitor->visitChildren(this);
 }
 
 grammarVMParser::InstrContext* grammarVMParser::instr() {
