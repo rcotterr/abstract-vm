@@ -12,7 +12,10 @@
 class  grammarVMLexer : public antlr4::Lexer {
 public:
   enum {
-    INSTR = 1, VALUE = 2, N = 3, Z = 4, SEP = 5, WHITESPACE = 6, COMMENT = 7
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
+    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, VALUE = 12, INT8 = 13, INT16 = 14, 
+    INT32 = 15, DOUBLE = 16, FLOAT = 17, N = 18, Z = 19, SEP = 20, OPEN_BRACKET = 21, 
+    CLOSE_BRACKET = 22, SINGLE_LINE_COMMENT = 23, SPACES = 24
   };
 
   explicit grammarVMLexer(antlr4::CharStream *input);

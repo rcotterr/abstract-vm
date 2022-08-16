@@ -1,19 +1,9 @@
 grammar grammarVM;
 
-prog : (decl | expr)+ EOF
+prog : instr (SEP instr)* EOF
     ;
 
-decl :
-    INSTR
-;
-
-expr :
-    decl SEP
-;
-
-//expr : INSTR SEP INSTR EOF;
-
-INSTR : 'push' VALUE
+instr : 'push' VALUE
     | 'pop'
     | 'dump'
     | 'assert' VALUE
@@ -27,12 +17,18 @@ INSTR : 'push' VALUE
     ;
 
 VALUE :
-    'int8'(N)
-    | 'int16'(N)
-    | 'int32'(N)
-    | 'float'(Z)
-    | 'double'(Z)
+    INT8 OPEN_BRACKET N CLOSE_BRACKET
+    | INT16 OPEN_BRACKET N CLOSE_BRACKET
+    | INT32 OPEN_BRACKET N CLOSE_BRACKET
+    | DOUBLE OPEN_BRACKET Z CLOSE_BRACKET
+    | FLOAT OPEN_BRACKET Z CLOSE_BRACKET
 ;
+
+INT8 : 'int8';
+INT16 : 'int16';
+INT32 : 'int32';
+DOUBLE : 'double';
+FLOAT : 'float';
 
 N : [-]?[0-9]+;
 
@@ -40,6 +36,14 @@ Z : [-]?[0-9]+.[0-9]+;
 
 SEP : '\n'+;
 
-WHITESPACE : ' ' -> skip ;
+OPEN_BRACKET : '(';
+CLOSE_BRACKET : ')';
 
-COMMENT : ';' ~[\r\n]* -> skip ;
+//Hidden channels
+SINGLE_LINE_COMMENT
+    : ';' ~[\n]* '\n' -> channel(HIDDEN)
+ ;
+
+SPACES
+ : [ \u000B\t] -> channel(HIDDEN)
+ ;

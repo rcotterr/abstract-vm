@@ -17,11 +17,8 @@ public:
   virtual void enterProg(grammarVMParser::ProgContext *ctx) = 0;
   virtual void exitProg(grammarVMParser::ProgContext *ctx) = 0;
 
-  virtual void enterDecl(grammarVMParser::DeclContext *ctx) = 0;
-  virtual void exitDecl(grammarVMParser::DeclContext *ctx) = 0;
-
-  virtual void enterExpr(grammarVMParser::ExprContext *ctx) = 0;
-  virtual void exitExpr(grammarVMParser::ExprContext *ctx) = 0;
+  virtual void enterInstr(grammarVMParser::InstrContext *ctx) = 0;
+  virtual void exitInstr(grammarVMParser::InstrContext *ctx) = 0;
 
 
 };

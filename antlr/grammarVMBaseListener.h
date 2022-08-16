@@ -19,11 +19,8 @@ public:
   virtual void enterProg(grammarVMParser::ProgContext * /*ctx*/) override { }
   virtual void exitProg(grammarVMParser::ProgContext * /*ctx*/) override { }
 
-  virtual void enterDecl(grammarVMParser::DeclContext * /*ctx*/) override { }
-  virtual void exitDecl(grammarVMParser::DeclContext * /*ctx*/) override { }
-
-  virtual void enterExpr(grammarVMParser::ExprContext * /*ctx*/) override { }
-  virtual void exitExpr(grammarVMParser::ExprContext * /*ctx*/) override { }
+  virtual void enterInstr(grammarVMParser::InstrContext * /*ctx*/) override { }
+  virtual void exitInstr(grammarVMParser::InstrContext * /*ctx*/) override { }
 
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

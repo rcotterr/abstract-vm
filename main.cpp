@@ -107,7 +107,7 @@ int main() {
 
 
 // Provide the input text in a stream
-    antlr4::ANTLRInputStream input("pop\nsub\n");
+    antlr4::ANTLRInputStream input("pop\nsub");
 
     // Create a lexer from the input
     grammarVMLexer  lexer(&input);
@@ -118,9 +118,9 @@ int main() {
     // Create a parser from the token stream
     grammarVMParser parser(&tokens);
 
-    grammarVMParser::ExprContext* expr = parser.expr();
+    grammarVMParser::ProgContext* prog = parser.prog();
     // Display the parse tree
-    std::cout << expr->toStringTree() << std::endl;
+    std::cout << prog->toStringTree() << std::endl;
 
     return 0;
 }

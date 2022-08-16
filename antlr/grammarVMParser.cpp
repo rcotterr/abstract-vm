@@ -43,22 +43,30 @@ void grammarvmParserInitialize() {
   assert(grammarvmParserStaticData == nullptr);
   auto staticData = std::make_unique<GrammarVMParserStaticData>(
     std::vector<std::string>{
-      "prog", "decl", "expr"
+      "prog", "instr"
     },
     std::vector<std::string>{
-      "", "", "", "", "", "", "' '"
+      "", "'push'", "'pop'", "'dump'", "'assert'", "'add'", "'sub'", "'mul'", 
+      "'div'", "'mod'", "'print'", "'exit'", "", "'int8'", "'int16'", "'int32'", 
+      "'double'", "'float'", "", "", "", "'('", "')'"
     },
     std::vector<std::string>{
-      "", "INSTR", "VALUE", "N", "Z", "SEP", "WHITESPACE", "COMMENT"
+      "", "", "", "", "", "", "", "", "", "", "", "", "VALUE", "INT8", "INT16", 
+      "INT32", "DOUBLE", "FLOAT", "N", "Z", "SEP", "OPEN_BRACKET", "CLOSE_BRACKET", 
+      "SINGLE_LINE_COMMENT", "SPACES"
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,7,20,2,0,7,0,2,1,7,1,2,2,7,2,1,0,1,0,4,0,9,8,0,11,0,12,0,10,1,0,1,
-  	0,1,1,1,1,1,2,1,2,1,2,1,2,0,0,3,0,2,4,0,0,18,0,8,1,0,0,0,2,14,1,0,0,0,
-  	4,16,1,0,0,0,6,9,3,2,1,0,7,9,3,4,2,0,8,6,1,0,0,0,8,7,1,0,0,0,9,10,1,0,
-  	0,0,10,8,1,0,0,0,10,11,1,0,0,0,11,12,1,0,0,0,12,13,5,0,0,1,13,1,1,0,0,
-  	0,14,15,5,1,0,0,15,3,1,0,0,0,16,17,3,2,1,0,17,18,5,5,0,0,18,5,1,0,0,0,
-  	2,8,10
+  	4,1,24,30,2,0,7,0,2,1,7,1,1,0,1,0,1,0,5,0,8,8,0,10,0,12,0,11,9,0,1,0,
+  	1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,28,8,1,1,
+  	1,0,0,2,0,2,0,0,38,0,4,1,0,0,0,2,27,1,0,0,0,4,9,3,2,1,0,5,6,5,20,0,0,
+  	6,8,3,2,1,0,7,5,1,0,0,0,8,11,1,0,0,0,9,7,1,0,0,0,9,10,1,0,0,0,10,12,1,
+  	0,0,0,11,9,1,0,0,0,12,13,5,0,0,1,13,1,1,0,0,0,14,15,5,1,0,0,15,28,5,12,
+  	0,0,16,28,5,2,0,0,17,28,5,3,0,0,18,19,5,4,0,0,19,28,5,12,0,0,20,28,5,
+  	5,0,0,21,28,5,6,0,0,22,28,5,7,0,0,23,28,5,8,0,0,24,28,5,9,0,0,25,28,5,
+  	10,0,0,26,28,5,11,0,0,27,14,1,0,0,0,27,16,1,0,0,0,27,17,1,0,0,0,27,18,
+  	1,0,0,0,27,20,1,0,0,0,27,21,1,0,0,0,27,22,1,0,0,0,27,23,1,0,0,0,27,24,
+  	1,0,0,0,27,25,1,0,0,0,27,26,1,0,0,0,28,3,1,0,0,0,2,9,27
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -113,24 +121,24 @@ grammarVMParser::ProgContext::ProgContext(ParserRuleContext *parent, size_t invo
   : ParserRuleContext(parent, invokingState) {
 }
 
+std::vector<grammarVMParser::InstrContext *> grammarVMParser::ProgContext::instr() {
+  return getRuleContexts<grammarVMParser::InstrContext>();
+}
+
+grammarVMParser::InstrContext* grammarVMParser::ProgContext::instr(size_t i) {
+  return getRuleContext<grammarVMParser::InstrContext>(i);
+}
+
 tree::TerminalNode* grammarVMParser::ProgContext::EOF() {
   return getToken(grammarVMParser::EOF, 0);
 }
 
-std::vector<grammarVMParser::DeclContext *> grammarVMParser::ProgContext::decl() {
-  return getRuleContexts<grammarVMParser::DeclContext>();
+std::vector<tree::TerminalNode *> grammarVMParser::ProgContext::SEP() {
+  return getTokens(grammarVMParser::SEP);
 }
 
-grammarVMParser::DeclContext* grammarVMParser::ProgContext::decl(size_t i) {
-  return getRuleContext<grammarVMParser::DeclContext>(i);
-}
-
-std::vector<grammarVMParser::ExprContext *> grammarVMParser::ProgContext::expr() {
-  return getRuleContexts<grammarVMParser::ExprContext>();
-}
-
-grammarVMParser::ExprContext* grammarVMParser::ProgContext::expr(size_t i) {
-  return getRuleContext<grammarVMParser::ExprContext>(i);
+tree::TerminalNode* grammarVMParser::ProgContext::SEP(size_t i) {
+  return getToken(grammarVMParser::SEP, i);
 }
 
 
@@ -164,32 +172,20 @@ grammarVMParser::ProgContext* grammarVMParser::prog() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(8); 
+    setState(4);
+    instr();
+    setState(9);
     _errHandler->sync(this);
     _la = _input->LA(1);
-    do {
-      setState(8);
-      _errHandler->sync(this);
-      switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 0, _ctx)) {
-      case 1: {
-        setState(6);
-        decl();
-        break;
-      }
-
-      case 2: {
-        setState(7);
-        expr();
-        break;
-      }
-
-      default:
-        break;
-      }
-      setState(10); 
+    while (_la == grammarVMParser::SEP) {
+      setState(5);
+      match(grammarVMParser::SEP);
+      setState(6);
+      instr();
+      setState(11);
       _errHandler->sync(this);
       _la = _input->LA(1);
-    } while (_la == grammarVMParser::INSTR);
+    }
     setState(12);
     match(grammarVMParser::EOF);
    
@@ -203,36 +199,36 @@ grammarVMParser::ProgContext* grammarVMParser::prog() {
   return _localctx;
 }
 
-//----------------- DeclContext ------------------------------------------------------------------
+//----------------- InstrContext ------------------------------------------------------------------
 
-grammarVMParser::DeclContext::DeclContext(ParserRuleContext *parent, size_t invokingState)
+grammarVMParser::InstrContext::InstrContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* grammarVMParser::DeclContext::INSTR() {
-  return getToken(grammarVMParser::INSTR, 0);
+tree::TerminalNode* grammarVMParser::InstrContext::VALUE() {
+  return getToken(grammarVMParser::VALUE, 0);
 }
 
 
-size_t grammarVMParser::DeclContext::getRuleIndex() const {
-  return grammarVMParser::RuleDecl;
+size_t grammarVMParser::InstrContext::getRuleIndex() const {
+  return grammarVMParser::RuleInstr;
 }
 
-void grammarVMParser::DeclContext::enterRule(tree::ParseTreeListener *listener) {
+void grammarVMParser::InstrContext::enterRule(tree::ParseTreeListener *listener) {
   auto parserListener = dynamic_cast<grammarVMListener *>(listener);
   if (parserListener != nullptr)
-    parserListener->enterDecl(this);
+    parserListener->enterInstr(this);
 }
 
-void grammarVMParser::DeclContext::exitRule(tree::ParseTreeListener *listener) {
+void grammarVMParser::InstrContext::exitRule(tree::ParseTreeListener *listener) {
   auto parserListener = dynamic_cast<grammarVMListener *>(listener);
   if (parserListener != nullptr)
-    parserListener->exitDecl(this);
+    parserListener->exitInstr(this);
 }
 
-grammarVMParser::DeclContext* grammarVMParser::decl() {
-  DeclContext *_localctx = _tracker.createInstance<DeclContext>(_ctx, getState());
-  enterRule(_localctx, 2, grammarVMParser::RuleDecl);
+grammarVMParser::InstrContext* grammarVMParser::instr() {
+  InstrContext *_localctx = _tracker.createInstance<InstrContext>(_ctx, getState());
+  enterRule(_localctx, 2, grammarVMParser::RuleInstr);
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -242,68 +238,93 @@ grammarVMParser::DeclContext* grammarVMParser::decl() {
     exitRule();
   });
   try {
-    enterOuterAlt(_localctx, 1);
-    setState(14);
-    match(grammarVMParser::INSTR);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
+    setState(27);
+    _errHandler->sync(this);
+    switch (_input->LA(1)) {
+      case grammarVMParser::T__0: {
+        enterOuterAlt(_localctx, 1);
+        setState(14);
+        match(grammarVMParser::T__0);
+        setState(15);
+        match(grammarVMParser::VALUE);
+        break;
+      }
 
-  return _localctx;
-}
+      case grammarVMParser::T__1: {
+        enterOuterAlt(_localctx, 2);
+        setState(16);
+        match(grammarVMParser::T__1);
+        break;
+      }
 
-//----------------- ExprContext ------------------------------------------------------------------
+      case grammarVMParser::T__2: {
+        enterOuterAlt(_localctx, 3);
+        setState(17);
+        match(grammarVMParser::T__2);
+        break;
+      }
 
-grammarVMParser::ExprContext::ExprContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
+      case grammarVMParser::T__3: {
+        enterOuterAlt(_localctx, 4);
+        setState(18);
+        match(grammarVMParser::T__3);
+        setState(19);
+        match(grammarVMParser::VALUE);
+        break;
+      }
 
-grammarVMParser::DeclContext* grammarVMParser::ExprContext::decl() {
-  return getRuleContext<grammarVMParser::DeclContext>(0);
-}
+      case grammarVMParser::T__4: {
+        enterOuterAlt(_localctx, 5);
+        setState(20);
+        match(grammarVMParser::T__4);
+        break;
+      }
 
-tree::TerminalNode* grammarVMParser::ExprContext::SEP() {
-  return getToken(grammarVMParser::SEP, 0);
-}
+      case grammarVMParser::T__5: {
+        enterOuterAlt(_localctx, 6);
+        setState(21);
+        match(grammarVMParser::T__5);
+        break;
+      }
 
+      case grammarVMParser::T__6: {
+        enterOuterAlt(_localctx, 7);
+        setState(22);
+        match(grammarVMParser::T__6);
+        break;
+      }
 
-size_t grammarVMParser::ExprContext::getRuleIndex() const {
-  return grammarVMParser::RuleExpr;
-}
+      case grammarVMParser::T__7: {
+        enterOuterAlt(_localctx, 8);
+        setState(23);
+        match(grammarVMParser::T__7);
+        break;
+      }
 
-void grammarVMParser::ExprContext::enterRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<grammarVMListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->enterExpr(this);
-}
+      case grammarVMParser::T__8: {
+        enterOuterAlt(_localctx, 9);
+        setState(24);
+        match(grammarVMParser::T__8);
+        break;
+      }
 
-void grammarVMParser::ExprContext::exitRule(tree::ParseTreeListener *listener) {
-  auto parserListener = dynamic_cast<grammarVMListener *>(listener);
-  if (parserListener != nullptr)
-    parserListener->exitExpr(this);
-}
+      case grammarVMParser::T__9: {
+        enterOuterAlt(_localctx, 10);
+        setState(25);
+        match(grammarVMParser::T__9);
+        break;
+      }
 
-grammarVMParser::ExprContext* grammarVMParser::expr() {
-  ExprContext *_localctx = _tracker.createInstance<ExprContext>(_ctx, getState());
-  enterRule(_localctx, 4, grammarVMParser::RuleExpr);
+      case grammarVMParser::T__10: {
+        enterOuterAlt(_localctx, 11);
+        setState(26);
+        match(grammarVMParser::T__10);
+        break;
+      }
 
-#if __cplusplus > 201703L
-  auto onExit = finally([=, this] {
-#else
-  auto onExit = finally([=] {
-#endif
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(16);
-    decl();
-    setState(17);
-    match(grammarVMParser::SEP);
+    default:
+      throw NoViableAltException(this);
+    }
    
   }
   catch (RecognitionException &e) {

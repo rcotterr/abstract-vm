@@ -12,11 +12,14 @@
 class  grammarVMParser : public antlr4::Parser {
 public:
   enum {
-    INSTR = 1, VALUE = 2, N = 3, Z = 4, SEP = 5, WHITESPACE = 6, COMMENT = 7
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
+    T__7 = 8, T__8 = 9, T__9 = 10, T__10 = 11, VALUE = 12, INT8 = 13, INT16 = 14, 
+    INT32 = 15, DOUBLE = 16, FLOAT = 17, N = 18, Z = 19, SEP = 20, OPEN_BRACKET = 21, 
+    CLOSE_BRACKET = 22, SINGLE_LINE_COMMENT = 23, SPACES = 24
   };
 
   enum {
-    RuleProg = 0, RuleDecl = 1, RuleExpr = 2
+    RuleProg = 0, RuleInstr = 1
   };
 
   explicit grammarVMParser(antlr4::TokenStream *input);
@@ -37,18 +40,17 @@ public:
 
 
   class ProgContext;
-  class DeclContext;
-  class ExprContext; 
+  class InstrContext; 
 
   class  ProgContext : public antlr4::ParserRuleContext {
   public:
     ProgContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    std::vector<InstrContext *> instr();
+    InstrContext* instr(size_t i);
     antlr4::tree::TerminalNode *EOF();
-    std::vector<DeclContext *> decl();
-    DeclContext* decl(size_t i);
-    std::vector<ExprContext *> expr();
-    ExprContext* expr(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> SEP();
+    antlr4::tree::TerminalNode* SEP(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -57,32 +59,18 @@ public:
 
   ProgContext* prog();
 
-  class  DeclContext : public antlr4::ParserRuleContext {
+  class  InstrContext : public antlr4::ParserRuleContext {
   public:
-    DeclContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    InstrContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *INSTR();
+    antlr4::tree::TerminalNode *VALUE();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
    
   };
 
-  DeclContext* decl();
-
-  class  ExprContext : public antlr4::ParserRuleContext {
-  public:
-    ExprContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    DeclContext *decl();
-    antlr4::tree::TerminalNode *SEP();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-   
-  };
-
-  ExprContext* expr();
+  InstrContext* instr();
 
 
   // By default the static state used to implement the parser is lazily initialized during the first
