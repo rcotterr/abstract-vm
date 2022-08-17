@@ -13,6 +13,8 @@
  * extended to create a visitor which only needs to handle a subset of the available methods.
  */
 class  grammarVMMyVisitor : public grammarVMVisitor {
+private:
+
 public:
 
   virtual std::any visitProg(grammarVMParser::ProgContext *ctx) override {
@@ -33,6 +35,14 @@ public:
           if (val != nullptr) {
               std::cout << "val: " <<  val->getText() << std::endl;
               //call func
+              auto test = val->getSymbol();
+              std::cout << "test: " <<  test->toString() << std::endl;
+//              auto test2 = ctx->getToken(grammarVMParser::INT_TYPE, 0);
+//              std::cout << "test2: " << test2->getText() << std::endl;
+
+//              ctx->
+//              test->
+//              auto test1 = val->;
           }
       }
       else {
@@ -42,6 +52,7 @@ public:
               //call func
           }
       }
+      ctx->getTokens();
 //        auto cmd = ctx->getToken(grammarVMParser::T__0, 0);
 //      if (cmd != NULL) {
 //          std::cout << cmd->getText() << std::endl;
