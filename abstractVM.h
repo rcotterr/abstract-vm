@@ -38,7 +38,9 @@ public:
 
         const std::string elem_val = elem->toString();
         const std::string operand_val = operand->toString();
-        if (elem_type == operand_type && elem_val == operand_val) {
+        double elem_num = std::stod(operand_val);
+        double operand_num = std::stod(elem_val);
+        if (elem_type == operand_type && elem_num == operand_num) {
             return;
         }
         throw std::exception(); // TO DO more understandable exception
@@ -51,6 +53,20 @@ public:
     };
     void add() {
         std::cout << "add method " << std::endl;
+        if (this->_stack.size() < 2) {
+            throw std::exception();
+        }
+        IOperand const * first = this->_stack.back();
+        std::cout << first->toString();
+        this->_stack.pop_back();
+        IOperand const * second = this->_stack.back();
+        std::cout << second->toString() << std::endl;
+        this->_stack.pop_back();
+
+        IOperand const * result = *first + *second;
+        std::cout << result->toString() << std::endl;
+        this->_stack.push_back(result);
+
     };
     void sub() {
         std::cout << "sub method " << std::endl;

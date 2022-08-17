@@ -38,7 +38,12 @@ IOperand const *Operand<T>::operator+(const IOperand &rhs) const {
         return nullptr;
     }
 
-    operand = new Operand<eOperandType>(DOUBLE, std::to_string(num + rhsNum));
+    eOperandType type = rhs.getType();
+    if (type < this->_type) {
+        type = this->_type;
+    }
+
+    operand = new Operand<eOperandType>(type, std::to_string(num + rhsNum));
 
     return operand;
 }
