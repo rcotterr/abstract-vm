@@ -22,6 +22,9 @@ public:
   virtual void enterInstr(grammarVMParser::InstrContext * /*ctx*/) override { }
   virtual void exitInstr(grammarVMParser::InstrContext * /*ctx*/) override { }
 
+  virtual void enterValue(grammarVMParser::ValueContext * /*ctx*/) override { }
+  virtual void exitValue(grammarVMParser::ValueContext * /*ctx*/) override { }
+
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }
   virtual void exitEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

@@ -23,6 +23,8 @@ public:
 
     virtual std::any visitInstr(grammarVMParser::InstrContext *context) = 0;
 
+    virtual std::any visitValue(grammarVMParser::ValueContext *context) = 0;
+
 
 };
 

@@ -4,7 +4,7 @@ prog : SEP* instr (SEP instr)* EOF
     ;
 
 instr :
-    CMD_VALUE VALUE
+    CMD_VALUE value
     | CMD
     ;
 
@@ -16,7 +16,7 @@ CMD :
     POP | DUMP | ADD | SUB | MUL | DIV | MOD | PRINT | EXIT
     ;
 
-VALUE :
+value :
     INT_TYPE OPEN_BRACKET N CLOSE_BRACKET
     | FLOAT_TYPE OPEN_BRACKET Z CLOSE_BRACKET
     ;

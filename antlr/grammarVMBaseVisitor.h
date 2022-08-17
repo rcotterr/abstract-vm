@@ -23,6 +23,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual std::any visitValue(grammarVMParser::ValueContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
 
 };
 

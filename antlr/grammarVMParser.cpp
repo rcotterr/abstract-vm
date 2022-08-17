@@ -44,30 +44,32 @@ void grammarvmParserInitialize() {
   assert(grammarvmParserStaticData == nullptr);
   auto staticData = std::make_unique<GrammarVMParserStaticData>(
     std::vector<std::string>{
-      "prog", "instr"
+      "prog", "instr", "value"
     },
     std::vector<std::string>{
-      "", "", "", "", "", "", "'int8'", "'int16'", "'int32'", "'double'", 
-      "'float'", "'push'", "'assert'", "'pop'", "'dump'", "'add'", "'sub'", 
-      "'mul'", "'div'", "'mod'", "'print'", "'exit'", "", "", "", "'('", 
-      "')'"
+      "", "", "", "", "", "'int8'", "'int16'", "'int32'", "'double'", "'float'", 
+      "'push'", "'assert'", "'pop'", "'dump'", "'add'", "'sub'", "'mul'", 
+      "'div'", "'mod'", "'print'", "'exit'", "", "", "", "'('", "')'"
     },
     std::vector<std::string>{
-      "", "CMD_VALUE", "CMD", "VALUE", "INT_TYPE", "FLOAT_TYPE", "INT8", 
-      "INT16", "INT32", "DOUBLE", "FLOAT", "PUSH", "ASSERT", "POP", "DUMP", 
-      "ADD", "SUB", "MUL", "DIV", "MOD", "PRINT", "EXIT", "N", "Z", "SEP", 
-      "OPEN_BRACKET", "CLOSE_BRACKET", "SINGLE_LINE_COMMENT", "SPACES"
+      "", "CMD_VALUE", "CMD", "INT_TYPE", "FLOAT_TYPE", "INT8", "INT16", 
+      "INT32", "DOUBLE", "FLOAT", "PUSH", "ASSERT", "POP", "DUMP", "ADD", 
+      "SUB", "MUL", "DIV", "MOD", "PRINT", "EXIT", "N", "Z", "SEP", "OPEN_BRACKET", 
+      "CLOSE_BRACKET", "SINGLE_LINE_COMMENT", "SPACES"
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,28,26,2,0,7,0,2,1,7,1,1,0,5,0,6,8,0,10,0,12,0,9,9,0,1,0,1,0,1,0,5,
-  	0,14,8,0,10,0,12,0,17,9,0,1,0,1,0,1,1,1,1,1,1,3,1,24,8,1,1,1,0,0,2,0,
-  	2,0,0,26,0,7,1,0,0,0,2,23,1,0,0,0,4,6,5,24,0,0,5,4,1,0,0,0,6,9,1,0,0,
-  	0,7,5,1,0,0,0,7,8,1,0,0,0,8,10,1,0,0,0,9,7,1,0,0,0,10,15,3,2,1,0,11,12,
-  	5,24,0,0,12,14,3,2,1,0,13,11,1,0,0,0,14,17,1,0,0,0,15,13,1,0,0,0,15,16,
-  	1,0,0,0,16,18,1,0,0,0,17,15,1,0,0,0,18,19,5,0,0,1,19,1,1,0,0,0,20,21,
-  	5,1,0,0,21,24,5,3,0,0,22,24,5,2,0,0,23,20,1,0,0,0,23,22,1,0,0,0,24,3,
-  	1,0,0,0,3,7,15,23
+  	4,1,27,38,2,0,7,0,2,1,7,1,2,2,7,2,1,0,5,0,8,8,0,10,0,12,0,11,9,0,1,0,
+  	1,0,1,0,5,0,16,8,0,10,0,12,0,19,9,0,1,0,1,0,1,1,1,1,1,1,3,1,26,8,1,1,
+  	2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,36,8,2,1,2,0,0,3,0,2,4,0,0,38,0,9,1,
+  	0,0,0,2,25,1,0,0,0,4,35,1,0,0,0,6,8,5,23,0,0,7,6,1,0,0,0,8,11,1,0,0,0,
+  	9,7,1,0,0,0,9,10,1,0,0,0,10,12,1,0,0,0,11,9,1,0,0,0,12,17,3,2,1,0,13,
+  	14,5,23,0,0,14,16,3,2,1,0,15,13,1,0,0,0,16,19,1,0,0,0,17,15,1,0,0,0,17,
+  	18,1,0,0,0,18,20,1,0,0,0,19,17,1,0,0,0,20,21,5,0,0,1,21,1,1,0,0,0,22,
+  	23,5,1,0,0,23,26,3,4,2,0,24,26,5,2,0,0,25,22,1,0,0,0,25,24,1,0,0,0,26,
+  	3,1,0,0,0,27,28,5,3,0,0,28,29,5,24,0,0,29,30,5,21,0,0,30,36,5,25,0,0,
+  	31,32,5,4,0,0,32,33,5,24,0,0,33,34,5,22,0,0,34,36,5,25,0,0,35,27,1,0,
+  	0,0,35,31,1,0,0,0,36,5,1,0,0,0,4,9,17,25,35
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -181,31 +183,31 @@ grammarVMParser::ProgContext* grammarVMParser::prog() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(7);
+    setState(9);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == grammarVMParser::SEP) {
-      setState(4);
+      setState(6);
       match(grammarVMParser::SEP);
-      setState(9);
-      _errHandler->sync(this);
-      _la = _input->LA(1);
-    }
-    setState(10);
-    instr();
-    setState(15);
-    _errHandler->sync(this);
-    _la = _input->LA(1);
-    while (_la == grammarVMParser::SEP) {
       setState(11);
-      match(grammarVMParser::SEP);
-      setState(12);
-      instr();
-      setState(17);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
-    setState(18);
+    setState(12);
+    instr();
+    setState(17);
+    _errHandler->sync(this);
+    _la = _input->LA(1);
+    while (_la == grammarVMParser::SEP) {
+      setState(13);
+      match(grammarVMParser::SEP);
+      setState(14);
+      instr();
+      setState(19);
+      _errHandler->sync(this);
+      _la = _input->LA(1);
+    }
+    setState(20);
     match(grammarVMParser::EOF);
    
   }
@@ -228,8 +230,8 @@ tree::TerminalNode* grammarVMParser::InstrContext::CMD_VALUE() {
   return getToken(grammarVMParser::CMD_VALUE, 0);
 }
 
-tree::TerminalNode* grammarVMParser::InstrContext::VALUE() {
-  return getToken(grammarVMParser::VALUE, 0);
+grammarVMParser::ValueContext* grammarVMParser::InstrContext::value() {
+  return getRuleContext<grammarVMParser::ValueContext>(0);
 }
 
 tree::TerminalNode* grammarVMParser::InstrContext::CMD() {
@@ -273,22 +275,132 @@ grammarVMParser::InstrContext* grammarVMParser::instr() {
     exitRule();
   });
   try {
-    setState(23);
+    setState(25);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case grammarVMParser::CMD_VALUE: {
         enterOuterAlt(_localctx, 1);
-        setState(20);
+        setState(22);
         match(grammarVMParser::CMD_VALUE);
-        setState(21);
-        match(grammarVMParser::VALUE);
+        setState(23);
+        value();
         break;
       }
 
       case grammarVMParser::CMD: {
         enterOuterAlt(_localctx, 2);
-        setState(22);
+        setState(24);
         match(grammarVMParser::CMD);
+        break;
+      }
+
+    default:
+      throw NoViableAltException(this);
+    }
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- ValueContext ------------------------------------------------------------------
+
+grammarVMParser::ValueContext::ValueContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* grammarVMParser::ValueContext::INT_TYPE() {
+  return getToken(grammarVMParser::INT_TYPE, 0);
+}
+
+tree::TerminalNode* grammarVMParser::ValueContext::OPEN_BRACKET() {
+  return getToken(grammarVMParser::OPEN_BRACKET, 0);
+}
+
+tree::TerminalNode* grammarVMParser::ValueContext::N() {
+  return getToken(grammarVMParser::N, 0);
+}
+
+tree::TerminalNode* grammarVMParser::ValueContext::CLOSE_BRACKET() {
+  return getToken(grammarVMParser::CLOSE_BRACKET, 0);
+}
+
+tree::TerminalNode* grammarVMParser::ValueContext::FLOAT_TYPE() {
+  return getToken(grammarVMParser::FLOAT_TYPE, 0);
+}
+
+tree::TerminalNode* grammarVMParser::ValueContext::Z() {
+  return getToken(grammarVMParser::Z, 0);
+}
+
+
+size_t grammarVMParser::ValueContext::getRuleIndex() const {
+  return grammarVMParser::RuleValue;
+}
+
+void grammarVMParser::ValueContext::enterRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<grammarVMListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->enterValue(this);
+}
+
+void grammarVMParser::ValueContext::exitRule(tree::ParseTreeListener *listener) {
+  auto parserListener = dynamic_cast<grammarVMListener *>(listener);
+  if (parserListener != nullptr)
+    parserListener->exitValue(this);
+}
+
+
+std::any grammarVMParser::ValueContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<grammarVMVisitor*>(visitor))
+    return parserVisitor->visitValue(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+grammarVMParser::ValueContext* grammarVMParser::value() {
+  ValueContext *_localctx = _tracker.createInstance<ValueContext>(_ctx, getState());
+  enterRule(_localctx, 4, grammarVMParser::RuleValue);
+
+#if __cplusplus > 201703L
+  auto onExit = finally([=, this] {
+#else
+  auto onExit = finally([=] {
+#endif
+    exitRule();
+  });
+  try {
+    setState(35);
+    _errHandler->sync(this);
+    switch (_input->LA(1)) {
+      case grammarVMParser::INT_TYPE: {
+        enterOuterAlt(_localctx, 1);
+        setState(27);
+        match(grammarVMParser::INT_TYPE);
+        setState(28);
+        match(grammarVMParser::OPEN_BRACKET);
+        setState(29);
+        match(grammarVMParser::N);
+        setState(30);
+        match(grammarVMParser::CLOSE_BRACKET);
+        break;
+      }
+
+      case grammarVMParser::FLOAT_TYPE: {
+        enterOuterAlt(_localctx, 2);
+        setState(31);
+        match(grammarVMParser::FLOAT_TYPE);
+        setState(32);
+        match(grammarVMParser::OPEN_BRACKET);
+        setState(33);
+        match(grammarVMParser::Z);
+        setState(34);
+        match(grammarVMParser::CLOSE_BRACKET);
         break;
       }
 

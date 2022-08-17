@@ -20,6 +20,9 @@ public:
   virtual void enterInstr(grammarVMParser::InstrContext *ctx) = 0;
   virtual void exitInstr(grammarVMParser::InstrContext *ctx) = 0;
 
+  virtual void enterValue(grammarVMParser::ValueContext *ctx) = 0;
+  virtual void exitValue(grammarVMParser::ValueContext *ctx) = 0;
+
 
 };
 

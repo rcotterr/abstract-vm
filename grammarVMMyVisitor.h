@@ -31,18 +31,26 @@ public:
       auto cmd = ctx->CMD_VALUE();
       if (cmd != nullptr) {
           std::cout << "cmd value: " << cmd->getText() << std::endl;
-          auto val = ctx->VALUE();
-          if (val != nullptr) {
-              std::cout << "val: " <<  val->getText() << std::endl;
-              //call func
-              auto test = val->getSymbol();
-              std::cout << "test: " <<  test->toString() << std::endl;
+          auto val_ctx = ctx->value();
+          if (val_ctx != nullptr) {
+//              std::cout << "val: " <<  val->getText() << std::endl;
+//              //call func
+//              auto test = val->getSymbol();
+//              std::cout << "test: " <<  test->toString() << std::endl;
 //              auto test2 = ctx->getToken(grammarVMParser::INT_TYPE, 0);
 //              std::cout << "test2: " << test2->getText() << std::endl;
 
 //              ctx->
 //              test->
 //              auto test1 = val->;
+            auto type = val_ctx->INT_TYPE();
+            auto num = val_ctx->N();
+            if (type == nullptr) {
+                type = val_ctx->FLOAT_TYPE();
+                num = val_ctx->Z();
+            }
+            std::cout << "val type: " << type->getText() << std::endl;
+            std::cout << "val num: " << num->getText() << std::endl;
           }
       }
       else {
@@ -52,7 +60,7 @@ public:
               //call func
           }
       }
-      ctx->getTokens();
+//      ctx->getTokens();
 //        auto cmd = ctx->getToken(grammarVMParser::T__0, 0);
 //      if (cmd != NULL) {
 //          std::cout << cmd->getText() << std::endl;
@@ -61,6 +69,11 @@ public:
 //      std::cout << ctx->getToken(grammarVMParser::T__0, 0)->getText() << std::endl;
     return visitChildren(ctx);
   }
+
+    virtual std::any visitValue(grammarVMParser::ValueContext *ctx) override {
+        return visitChildren(ctx);
+    }
+
 
 };
 
