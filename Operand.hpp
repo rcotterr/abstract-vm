@@ -3,7 +3,7 @@
 #include "IOperand.hpp"
 
 #ifndef OPERAND_HPP
-#define OPERAND_HPP
+# define OPERAND_HPP
 
 
 template <class T>

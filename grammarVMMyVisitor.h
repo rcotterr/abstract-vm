@@ -6,6 +6,7 @@
 
 #include "antlr4-runtime.h"
 #include "grammarVMVisitor.h"
+#include "abstractVM.h"
 
 
 /**
@@ -14,8 +15,12 @@
  */
 class  grammarVMMyVisitor : public grammarVMVisitor {
 private:
+    abstractVM _vm;
 
 public:
+    grammarVMMyVisitor(){
+        this->_vm = abstractVM();
+    };
 
   virtual std::any visitProg(grammarVMParser::ProgContext *ctx) override {
     return visitChildren(ctx);
@@ -51,6 +56,7 @@ public:
             }
             std::cout << "val type: " << type->getText() << std::endl;
             std::cout << "val num: " << num->getText() << std::endl;
+            this->_vm.processInstruction(cmd->getText(), type->getText(), num->getText());
           }
       }
       else {

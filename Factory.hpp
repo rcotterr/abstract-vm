@@ -3,7 +3,7 @@
 #include "IOperand.hpp"
 
 #ifndef FACTORY_HPP
-#define FACTORY_HPP
+# define FACTORY_HPP
 
 
 class Factory {
