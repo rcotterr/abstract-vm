@@ -11,8 +11,10 @@
 #include "antlr/grammarVMParser.h"
 //#include "antlr/grammarVMVisitor.h"
 //#include "antlr/grammarVMVisitor.cpp"
-#include "antlr/grammarVMBaseVisitor.cpp"
+//#include "antlr/grammarVMBaseVisitor.cpp"
 //#include "VMVisitor.cpp"
+#include "grammarVMMyVisitor.h"
+
 
 int main() {
 
@@ -137,7 +139,7 @@ int main() {
 //    VMVisitor visitor;
 //    grammarVMVisitor visitor = grammarVMVisitor();
 //    prog->accept(&visitor);
-    grammarVMBaseVisitor visitor;
+    grammarVMMyVisitor visitor;
     prog->accept(&visitor);
 //    visitor.visit(prog);
 //    Scene scene = visitor.visitFile(tree);
