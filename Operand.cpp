@@ -10,7 +10,7 @@ Operand<T>::Operand() {
 template<typename T>
 Operand<T>::Operand(eOperandType type, std::string const &value) {
     this->_type = type;
-    this->_value = &value;
+    this->_value = value;
 }
 
 template<typename T>
@@ -50,7 +50,7 @@ IOperand const *Operand<T>::operator+(const IOperand &rhs) const {
 
 template<class T>
 std::string const &Operand<T>::toString() const {
-    return *(this->_value);
+    return this->_value;
 }
 
 template<class T>

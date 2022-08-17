@@ -58,11 +58,24 @@ int main() {
     std::vector< IOperand *> stack; //TO DO INTEGER instead of int
 //    std::vector<Operand<int> > stack; //TO DO INTEGER instead of int
 
+//    stack.push(test);
     stack.push_back(test);
     stack.push_back(test1);
     stack.push_back(test2);
     stack.push_back(test3);
     stack.push_back(test4);
+//    for (auto i: stack) {
+//        std::cout << i->getType() << std::endl; // will print: "a b c"
+//    }
+//    for (std::vector<IOperand *>::reverse_iterator i = stack.rbegin();
+//         i != stack.rend(); ++i ) {
+//        std::cout << i->getType() << std::endl;
+//    }
+    for (auto it = stack.rbegin(); it != stack.rend(); ++it)
+    {
+        std::cout << (*it)->getType() << std::endl;
+    }
+
     IOperand * testNew = stack.back();
     std::cout << testNew->getType();
     stack.pop_back();

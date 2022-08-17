@@ -14,17 +14,37 @@
 
 class abstractVM {
 private:
-    std::vector< IOperand *> _stack;
+    std::vector< const IOperand *> _stack;
+    Factory _factory;
 
 public:
-    void push(eOperandType type, std::string num) {
+    abstractVM() {
+        this->_factory = Factory();// TO DO check memory lick
+        this->_factory = Factory();// TO DO check memory lick
+    };
+    ~abstractVM() {
+        this->_stack.clear();// TO DO check memory lick
+    };
+    void push(IOperand const * operand) {
+        std::cout << "push method " << std::endl;
+        this->_stack.push_back(operand);
+//        (this->_stack).push_back(operand);
         return;
     };
-    void assert_(eOperandType type, std::string num) {
-        return;
+    void assert_(IOperand const * operand) {
+        IOperand const * elem = this->_stack.back();
+        eOperandType elem_type = elem->getType();
+        eOperandType operand_type = operand->getType();
+
+        const std::string elem_val = elem->toString();
+        const std::string operand_val = operand->toString();
+        if (elem_type == operand_type && elem_val == operand_val) {
+            return;
+        }
+        throw std::exception(); // TO DO more understandable exception
     };
     void processInstruction(std::string cmd, std::string type, std::string num) {
-        eOperandType new_type;
+        eOperandType new_type; //TO DO check valid type
         if (type == "int8") {
             new_type = INT8;
         }
@@ -40,11 +60,15 @@ public:
         else if (type == "double") {
             new_type = DOUBLE;
         }
+        else {
+            std::cout << "error!" << std::endl;
+        }
 
+        IOperand const * factory_operand = this->_factory.createOperand(new_type, num);
         if (cmd == "push") {
-            this->push(new_type, num);
+            this->push(factory_operand);
         } else if (cmd == "assert") {
-            this->assert_(new_type, num);
+            this->assert_(factory_operand);
         }
     };
 };
