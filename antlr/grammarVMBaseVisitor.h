@@ -20,28 +20,9 @@ public:
   }
 
   virtual std::any visitInstr(grammarVMParser::InstrContext *ctx) override {
-      printf("visitInstr\n");
-      std::cout << ctx->getText() << std::endl;
-//      auto cmd = ctx->getToken(grammarVMParser::T__0, 0); //get cmd: push, add, etc
-//      if (cmd == nullptr) {
-//          cmd = ctx->getToken(grammarVMParser::T__3, 0); //get cmd: push, add, etc
-//      }
-      auto cmd = ctx->CMD_VALUE();
-      if (cmd != nullptr) {
-          std::cout << cmd->getText() << std::endl;
-          auto val = ctx->VALUE();
-          if (val != nullptr) {
-              std::cout << val->getText() << std::endl;
-          }
-      }
-//        auto cmd = ctx->getToken(grammarVMParser::T__0, 0);
-//      if (cmd != NULL) {
-//          std::cout << cmd->getText() << std::endl;
-//      }
-//      std::cout << ctx->VALUE()->getText() << std::endl;
-//      std::cout << ctx->getToken(grammarVMParser::T__0, 0)->getText() << std::endl;
     return visitChildren(ctx);
   }
+
 
 };
 

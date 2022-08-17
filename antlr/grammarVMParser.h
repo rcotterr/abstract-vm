@@ -12,11 +12,11 @@
 class  grammarVMParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, T__6 = 7, 
-    T__7 = 8, T__8 = 9, CMD_VALUE = 10, VALUE = 11, INT8 = 12, INT16 = 13, 
-    INT32 = 14, DOUBLE = 15, FLOAT = 16, PUSH = 17, ASSERT = 18, N = 19, 
-    Z = 20, SEP = 21, OPEN_BRACKET = 22, CLOSE_BRACKET = 23, SINGLE_LINE_COMMENT = 24, 
-    SPACES = 25
+    CMD_VALUE = 1, CMD = 2, VALUE = 3, INT8 = 4, INT16 = 5, INT32 = 6, DOUBLE = 7, 
+    FLOAT = 8, PUSH = 9, ASSERT = 10, POP = 11, DUMP = 12, ADD = 13, SUB = 14, 
+    MUL = 15, DIV = 16, MOD = 17, PRINT = 18, EXIT = 19, N = 20, Z = 21, 
+    SEP = 22, OPEN_BRACKET = 23, CLOSE_BRACKET = 24, SINGLE_LINE_COMMENT = 25, 
+    SPACES = 26
   };
 
   enum {
@@ -68,6 +68,7 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *CMD_VALUE();
     antlr4::tree::TerminalNode *VALUE();
+    antlr4::tree::TerminalNode *CMD();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

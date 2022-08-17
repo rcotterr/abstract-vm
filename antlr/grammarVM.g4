@@ -1,30 +1,20 @@
 grammar grammarVM;
 
-prog : instr (SEP instr)* EOF
+prog : SEP* instr (SEP instr)* EOF
     ;
 
-instr : CMD_VALUE VALUE
-    | 'pop'
-    | 'dump'
-    | CMD_VALUE VALUE
-    | 'add'
-    | 'sub'
-    | 'mul'
-    | 'div'
-    | 'mod'
-    | 'print'
-    | 'exit'
+instr :
+    CMD_VALUE VALUE
+    | CMD
     ;
 
 CMD_VALUE :
     PUSH | ASSERT
     ;
 
-//CMD : POP
-//    | DUMP
-//    | ADD
-//    |
-//;
+CMD :
+    POP | DUMP | ADD | SUB | MUL | DIV | MOD | PRINT | EXIT
+    ;
 
 VALUE :
     INT8 OPEN_BRACKET N CLOSE_BRACKET
@@ -32,16 +22,25 @@ VALUE :
     | INT32 OPEN_BRACKET N CLOSE_BRACKET
     | DOUBLE OPEN_BRACKET Z CLOSE_BRACKET
     | FLOAT OPEN_BRACKET Z CLOSE_BRACKET
-;
+    ;
 
-INT8 : 'int8';
-INT16 : 'int16';
-INT32 : 'int32';
+INT8   : 'int8';
+INT16  : 'int16';
+INT32  : 'int32';
 DOUBLE : 'double';
-FLOAT : 'float';
+FLOAT  : 'float';
 
-PUSH : 'push';
+PUSH   : 'push';
 ASSERT : 'assert';
+POP    : 'pop';
+DUMP   : 'dump';
+ADD    : 'add';
+SUB    : 'sub';
+MUL    : 'mul';
+DIV    : 'div';
+MOD    : 'mod';
+PRINT  : 'print';
+EXIT   : 'exit';
 
 N : [-]?[0-9]+;
 
@@ -55,8 +54,8 @@ CLOSE_BRACKET : ')';
 //Hidden channels
 SINGLE_LINE_COMMENT
     : ';' ~[\n]* '\n' -> channel(HIDDEN)
- ;
+    ;
 
 SPACES
- : [ \u000B\t] -> channel(HIDDEN)
- ;
+    : [ \u000B\t] -> channel(HIDDEN)
+    ;
