@@ -43,6 +43,35 @@ public:
         }
         throw std::exception(); // TO DO more understandable exception
     };
+    void pop() {
+        std::cout << "pop method " << std::endl;
+    };
+    void dump() {
+        std::cout << "dump method " << std::endl;
+    };
+    void add() {
+        std::cout << "add method " << std::endl;
+    };
+    void sub() {
+        std::cout << "sub method " << std::endl;
+    };
+    void mul() {
+        std::cout << "mul method " << std::endl;
+    };
+    void div() {
+        std::cout << "div method " << std::endl;
+    };
+    void mod() {
+        std::cout << "mod method " << std::endl;
+    };
+    void print() {
+        std::cout << "print method " << std::endl;
+    };
+    void exit() {
+        std::cout << "exit method " << std::endl;
+    };
+
+
     void processInstruction(std::string cmd, std::string type, std::string num) {
         eOperandType new_type; //TO DO check valid type
         if (type == "int8") {
@@ -69,6 +98,33 @@ public:
             this->push(factory_operand);
         } else if (cmd == "assert") {
             this->assert_(factory_operand);
+        }
+    };
+    void processInstruction(std::string cmd) {
+        if (cmd == "pop") {
+            this->pop();
+        } else if (cmd == "dump") {
+            this->dump();
+        }else if (cmd == "add") {
+            this->add();
+        }
+        else if (cmd == "sub") {
+            this->sub();
+        }
+        else if (cmd == "mul") {
+            this->mul();
+        }
+        else if (cmd == "div") {
+            this->div();
+        }
+        else if (cmd == "mod") {
+            this->mod();
+        }
+        else if (cmd == "print") {
+            this->print();
+        }
+        else if (cmd == "exit") {
+            this->exit();
         }
     };
 };

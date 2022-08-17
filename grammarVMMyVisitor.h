@@ -63,6 +63,7 @@ public:
           cmd = ctx->CMD();
           if (cmd != nullptr) {
               std::cout << "cmd: " << cmd->getText() << std::endl;
+              this->_vm.processInstruction(cmd->getText());
               //call func
           }
       }
