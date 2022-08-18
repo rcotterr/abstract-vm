@@ -112,6 +112,9 @@ int main() {
                                    "push int8(65)\n"
                                    "print\n"
                                    "dump\n"
+//                                   "push int8(0)\n"
+//                                   "push int8(1)\n"
+//                                   "div\n"
                                    "exit");
 //            "push int32(2)\n"
 //                                   "push int32(3)\n"
@@ -136,10 +139,16 @@ int main() {
     grammarVMMyVisitor visitor;
     try {
         prog->accept(&visitor);
-        throw std::exception();
+        throw std::exception(); //TO DO move exception to some class with normal name
+    }
+    catch (abstractVM::ZeroDivision& e) {
+        std::cout << e.what() << std::endl;
     }
     catch (abstractVM::ExitProgram& e) {
         std::cout << e.what() << std::endl;
+    }
+    catch (std::exception& e) {
+        std::cout << "No exit method" << std::endl;
     }
 
     return 0;

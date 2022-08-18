@@ -123,7 +123,7 @@ public:
         this->_stack.pop_back();
 
         if (std::stod(second->toString()) == 0) {
-            throw std::exception();
+            throw ZeroDivision();
         }
         IOperand const * result = *first / *second;
         std::cout << result->toString() << std::endl;
@@ -232,6 +232,14 @@ public:
         virtual const char * what() const throw()
         {
             return ("Exit the program");
+        }
+    };
+    class ZeroDivision : public std::exception
+    {
+    public:
+        virtual const char * what() const throw()
+        {
+            return ("Division/modulo by 0");
         }
     };
 };
