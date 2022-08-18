@@ -46,10 +46,19 @@ public:
         throw std::exception(); // TO DO more understandable exception
     };
     void pop() {
-        std::cout << "pop method " << std::endl;
+        std::cout << "pop method before" << this->_stack.size() << std::endl;
+        if (this->_stack.size() < 1) {
+            throw std::exception();
+        }
+        this->_stack.pop_back();
+        std::cout << "pop method after" << this->_stack.size() << std::endl;
     };
     void dump() {
-        std::cout << "dump method " << std::endl;
+        std::cout << "dump method " << std::endl; //TO DO set precision in dump
+        for (auto it = this->_stack.rbegin(); it != this->_stack.rend(); ++it)
+        {
+            std::cout << (*it)->toString() << std::endl;
+        }
     };
     void add() {
         std::cout << "add method " << std::endl;
@@ -70,21 +79,93 @@ public:
     };
     void sub() {
         std::cout << "sub method " << std::endl;
+        if (this->_stack.size() < 2) {
+            throw std::exception();
+        }
+        IOperand const * first = this->_stack.back();
+        std::cout << first->toString();
+        this->_stack.pop_back();
+        IOperand const * second = this->_stack.back();
+        std::cout << second->toString() << std::endl;
+        this->_stack.pop_back();
+
+        IOperand const * result = *first - *second;
+        std::cout << result->toString() << std::endl;
+        this->_stack.push_back(result);
     };
     void mul() {
         std::cout << "mul method " << std::endl;
+        if (this->_stack.size() < 2) {
+            throw std::exception();
+        }
+        IOperand const * first = this->_stack.back();
+        std::cout << first->toString();
+        this->_stack.pop_back();
+        IOperand const * second = this->_stack.back();
+        std::cout << second->toString() << std::endl;
+        this->_stack.pop_back();
+
+        IOperand const * result = *first * *second;
+        std::cout << result->toString() << std::endl;
+        this->_stack.push_back(result);
     };
     void div() {
         std::cout << "div method " << std::endl;
+        if (this->_stack.size() < 2) {
+            throw std::exception();
+        }
+        IOperand const * first = this->_stack.back();
+        std::cout << first->toString();
+        this->_stack.pop_back();
+        IOperand const * second = this->_stack.back();
+        std::cout << second->toString() << std::endl;
+        this->_stack.pop_back();
+
+        if (std::stod(second->toString()) == 0) {
+            throw std::exception();
+        }
+        IOperand const * result = *first / *second;
+        std::cout << result->toString() << std::endl;
+        this->_stack.push_back(result);
     };
     void mod() {
         std::cout << "mod method " << std::endl;
+        if (this->_stack.size() < 2) {
+            throw std::exception();
+        }
+        IOperand const * first = this->_stack.back();
+        std::cout << first->toString();
+        this->_stack.pop_back();
+        IOperand const * second = this->_stack.back();
+        std::cout << second->toString() << std::endl;
+        this->_stack.pop_back();
+
+        if (std::stod(second->toString()) == 0) {
+            throw std::exception();
+        }
+        IOperand const * result = *first % *second;
+        std::cout << result->toString() << std::endl;
+        this->_stack.push_back(result);
     };
     void print() {
         std::cout << "print method " << std::endl;
+        if (this->_stack.size() < 1) {
+            throw std::exception();
+        }
+        IOperand const * first = this->_stack.back();
+        std::cout << first->toString();
+        eOperandType elem_type = first->getType();
+        if (elem_type != INT8) {
+            throw std::exception();
+        }
+        int num = std::stoi(first->toString());
+//        char c = char(num);
+        char c = static_cast<char>(num);
+        std::cout << c << std::endl;
     };
     void exit() {
         std::cout << "exit method " << std::endl;
+        throw ExitProgram();
     };
 
 
@@ -141,6 +222,15 @@ public:
         }
         else if (cmd == "exit") {
             this->exit();
+        }
+    };
+
+    class ExitProgram : public std::exception
+    {
+    public:
+        virtual const char * what() const throw()
+        {
+            return ("Exit the program");
         }
     };
 };

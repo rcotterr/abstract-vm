@@ -14,6 +14,7 @@
 //#include "antlr/grammarVMBaseVisitor.cpp"
 //#include "VMVisitor.cpp"
 #include "grammarVMMyVisitor.h"
+#include "abstractVM.h"
 
 
 int main() {
@@ -132,7 +133,31 @@ int main() {
                                    "add\n"
                                    "assert int32(5)\n"
                                    "dump\n"
+                                   "pop\n"
+                                   "dump\n"
+                                   "push int32(3)\n"
+                                   "push int32(5)\n"
+                                   "sub\n"
+                                   "dump\n"
+                                   "push int32(3)\n"
+                                   "mul\n"
+                                   "dump\n"
+                                   "push int8(12)\n"
+                                   "div\n"
+                                   "dump\n"
+                                   "push int8(3)\n"
+                                   "mod\n"
+                                   "dump\n"
+                                   "push int8(65)\n"
+                                   "print\n"
+                                   "dump\n"
                                    "exit");
+//            "push int32(2)\n"
+//                                   "push int32(3)\n"
+//                                   "add\n"
+//                                   "assert int32(5)\n"
+//                                   "dump\n"
+//                                   "exit");
 
     // Create a lexer from the input
     grammarVMLexer  lexer(&input);
@@ -153,7 +178,14 @@ int main() {
 //    grammarVMVisitor visitor = grammarVMVisitor();
 //    prog->accept(&visitor);
     grammarVMMyVisitor visitor;
-    prog->accept(&visitor);
+    try {
+        prog->accept(&visitor);
+        throw std::exception();
+    }
+    catch (abstractVM::ExitProgram& e) {
+        std::cout << e.what() << std::endl;
+    }
+
 //    visitor.visit(prog);
 //    Scene scene = visitor.visitFile(tree);
 //    scene.draw();
