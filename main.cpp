@@ -9,10 +9,6 @@
 #include "antlr4-runtime.h"
 #include "antlr/grammarVMLexer.h"
 #include "antlr/grammarVMParser.h"
-//#include "antlr/grammarVMVisitor.h"
-//#include "antlr/grammarVMVisitor.cpp"
-//#include "antlr/grammarVMBaseVisitor.cpp"
-//#include "VMVisitor.cpp"
 #include "grammarVMMyVisitor.h"
 #include "abstractVM.h"
 
@@ -24,11 +20,11 @@ int main() {
     std::cout << "factory_method " << factory_test->getType() << std::endl;
     delete factory_test;
 
-    IOperand * test = new Operand<eOperandType>(INT8, "1"); //TO DO INTEGER instead of int
-    IOperand * test1 = new Operand<eOperandType>(INT16, "2"); //TO DO INTEGER instead of int
-    IOperand * test2 = new Operand<eOperandType>(INT32, "3"); //TO DO INTEGER instead of int
-    IOperand * test3 = new Operand<eOperandType>(FLOAT, "4"); //TO DO INTEGER instead of int
-    IOperand * test4 = new Operand<eOperandType>(DOUBLE, "5"); //TO DO INTEGER instead of int
+    IOperand * test = new Operand<eOperandType>(INT8, "1");
+    IOperand * test1 = new Operand<eOperandType>(INT16, "2");
+    IOperand * test2 = new Operand<eOperandType>(INT32, "3");
+    IOperand * test3 = new Operand<eOperandType>(FLOAT, "4");
+    IOperand * test4 = new Operand<eOperandType>(DOUBLE, "5");
 
     IOperand const * test_sum = *test1 + *test2;
     const std::string test_sum_string = test_sum->toString();
@@ -56,22 +52,14 @@ int main() {
     delete test_modulo;
 
 
-    std::vector< IOperand *> stack; //TO DO INTEGER instead of int
-//    std::vector<Operand<int> > stack; //TO DO INTEGER instead of int
+    std::vector< IOperand *> stack;
 
-//    stack.push(test);
     stack.push_back(test);
     stack.push_back(test1);
     stack.push_back(test2);
     stack.push_back(test3);
     stack.push_back(test4);
-//    for (auto i: stack) {
-//        std::cout << i->getType() << std::endl; // will print: "a b c"
-//    }
-//    for (std::vector<IOperand *>::reverse_iterator i = stack.rbegin();
-//         i != stack.rend(); ++i ) {
-//        std::cout << i->getType() << std::endl;
-//    }
+
     for (auto it = stack.rbegin(); it != stack.rend(); ++it)
     {
         std::cout << (*it)->getType() << std::endl;
@@ -97,33 +85,6 @@ int main() {
     delete test2;
     delete test3;
     delete test4;
-//
-
-//    enum Type { INTEGER, DOUBLE, /* ... */ };
-//
-//    union Data {
-//        uint64_t as_integer;
-//        double as_double;
-//        // ...
-//    };
-//
-//    struct Value {
-//        Type type;
-//        Data data;
-//         public:     //by default also it is public
-//            hello();
-//            ~hello();
-//    };
-//
-//    std::vector<Value> stack;
-//
-//    Value v = Value();
-//    // v.type = INTEGER;
-//    // v.data = 1;
-//
-//    stack.push_back(v);
-//    // for (Value i: stack)
-//    //     std::cout << i.data << ' ';
 
 
 // Provide the input text in a stream
@@ -172,11 +133,6 @@ int main() {
     // Display the parse tree
     std::cout << prog->toStringTree() << std::endl;
 
-
-//    grammarVMParser::ProgContext* tree = parser.prog();
-//    VMVisitor visitor;
-//    grammarVMVisitor visitor = grammarVMVisitor();
-//    prog->accept(&visitor);
     grammarVMMyVisitor visitor;
     try {
         prog->accept(&visitor);
@@ -186,12 +142,5 @@ int main() {
         std::cout << e.what() << std::endl;
     }
 
-//    visitor.visit(prog);
-//    Scene scene = visitor.visitFile(tree);
-//    scene.draw();
-
     return 0;
 }
-
-
-// https://stackoverflow.com/questions/21805574/how-to-have-a-c-stack-with-more-than-one-data-type
