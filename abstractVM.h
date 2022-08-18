@@ -57,7 +57,8 @@ public:
         std::cout << "dump method " << std::endl; //TO DO set precision in dump
         for (auto it = this->_stack.rbegin(); it != this->_stack.rend(); ++it)
         {
-            std::cout << (*it)->toString() << std::endl;
+            double elem_num = std::stod((*it)->toString());
+            std::cout << elem_num << std::endl;
         }
     };
     void add() {
