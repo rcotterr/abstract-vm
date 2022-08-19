@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-//#include <boost/lexical_cast.hpp>
 #include "Operand.hpp"
 #include "Factory.hpp"
 
@@ -30,18 +29,18 @@ public:
         eOperandType operand_type = operand->getType();
 
         const std::string elem_val = elem->toString();
-        const std::string operand_val = operand->toString();
+        const std::string& operand_val = operand->toString();
         double elem_num = std::stod(operand_val);
         double operand_num = std::stod(elem_val);
         if (elem_type == operand_type && elem_num == operand_num) {
             return;
         }
-        throw std::exception(); // TO DO more understandable exception
+        throw AssertNotTrue();
     };
     void pop() {
         std::cout << "pop method before" << this->_stack.size() << std::endl;
-        if (this->_stack.size() < 1) {
-            throw std::exception();
+        if (this->_stack.empty()) {
+            throw PopEmptyStack();
         }
         this->_stack.pop_back();
         std::cout << "pop method after" << this->_stack.size() << std::endl;
@@ -265,6 +264,22 @@ public:
         virtual const char * what() const throw()
         {
             return ("Division/modulo by 0");
+        }
+    };
+    class AssertNotTrue : public std::exception
+    {
+    public:
+        virtual const char * what() const throw()
+        {
+            return ("Assert not true");
+        }
+    };
+    class PopEmptyStack : public std::exception
+    {
+    public:
+        virtual const char * what() const throw()
+        {
+            return ("Instruction pop on empty stack");
         }
     };
 };
