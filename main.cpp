@@ -89,7 +89,7 @@ int main() {
 
 // Provide the input text in a stream
 //    antlr4::ANTLRInputStream input("pop\nsub");
-    std::ifstream t("/Users/marina.romashkova/abstract-vm/examples/check_test1");
+    std::ifstream t("/Users/marina.romashkova/abstract-vm/examples/check_test8");
     std::stringstream buffer;
     buffer << t.rdbuf();
     antlr4::ANTLRInputStream input(buffer.str());

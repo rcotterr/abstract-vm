@@ -65,7 +65,7 @@ public:
         std::cout << second->toString() << std::endl;
         this->_stack.pop_back();
 
-        IOperand const * result = *first + *second;
+        IOperand const * result = *second + *first;
         std::cout << result->toString() << std::endl;
         this->_stack.push_back(result);
 
@@ -82,7 +82,7 @@ public:
         std::cout << second->toString() << std::endl;
         this->_stack.pop_back();
 
-        IOperand const * result = *first - *second;
+        IOperand const * result = *second - *first;
         std::cout << result->toString() << std::endl;
         this->_stack.push_back(result);
     };
@@ -98,7 +98,7 @@ public:
         std::cout << second->toString() << std::endl;
         this->_stack.pop_back();
 
-        IOperand const * result = *first * *second;
+        IOperand const * result = *second * *first;
         std::cout << result->toString() << std::endl;
         this->_stack.push_back(result);
     };
@@ -114,10 +114,10 @@ public:
         std::cout << second->toString() << std::endl;
         this->_stack.pop_back();
 
-        if (std::stod(second->toString()) == 0) {
+        if (std::stod(first->toString()) == 0) {
             throw ZeroDivision();
         }
-        IOperand const * result = *first / *second;
+        IOperand const * result = *second / *first;
         std::cout << result->toString() << std::endl;
         this->_stack.push_back(result);
     };
@@ -133,10 +133,10 @@ public:
         std::cout << second->toString() << std::endl;
         this->_stack.pop_back();
 
-        if (std::stod(second->toString()) == 0) {
+        if (std::stod(first->toString()) == 0) {
             throw std::exception();
         }
-        IOperand const * result = *first % *second;
+        IOperand const * result = *second % *first;
         std::cout << result->toString() << std::endl;
         this->_stack.push_back(result);
     };
