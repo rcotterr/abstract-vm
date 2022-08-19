@@ -243,6 +243,9 @@ antlr4-generator_DIR:PATH=/usr/local/lib/cmake/antlr4-generator
 //The directory containing a CMake configuration file for antlr4-runtime.
 antlr4-runtime_DIR:PATH=/usr/local/lib/cmake/antlr4-runtime
 
+//The directory containing a CMake configuration file for tclap.
+tclap_DIR:PATH=tclap_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries

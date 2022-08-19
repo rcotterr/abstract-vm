@@ -50,7 +50,7 @@ build CMakeFiles/Parsertest.dir/main.cpp.o: CXX_COMPILER__Parsertest_Debug /User
   DEFINES = -DANTLR4CPP_STATIC
   DEP_FILE = CMakeFiles/Parsertest.dir/main.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX11.sdk/System/Library/Frameworks  -std=gnu++17
-  INCLUDES = -I/usr/local/include/antlr4-runtime -I/Users/marina.romashkova/abstract-vm/antlr
+  INCLUDES = -I/usr/local/include/antlr4-runtime -I/usr/local/include -I/Users/marina.romashkova/abstract-vm/antlr
   OBJECT_DIR = CMakeFiles/Parsertest.dir
   OBJECT_FILE_DIR = CMakeFiles/Parsertest.dir
 
@@ -58,7 +58,7 @@ build CMakeFiles/Parsertest.dir/antlr/grammarVMLexer.cpp.o: CXX_COMPILER__Parser
   DEFINES = -DANTLR4CPP_STATIC
   DEP_FILE = CMakeFiles/Parsertest.dir/antlr/grammarVMLexer.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX11.sdk/System/Library/Frameworks  -std=gnu++17
-  INCLUDES = -I/usr/local/include/antlr4-runtime -I/Users/marina.romashkova/abstract-vm/antlr
+  INCLUDES = -I/usr/local/include/antlr4-runtime -I/usr/local/include -I/Users/marina.romashkova/abstract-vm/antlr
   OBJECT_DIR = CMakeFiles/Parsertest.dir
   OBJECT_FILE_DIR = CMakeFiles/Parsertest.dir/antlr
 
@@ -66,7 +66,7 @@ build CMakeFiles/Parsertest.dir/antlr/grammarVMParser.cpp.o: CXX_COMPILER__Parse
   DEFINES = -DANTLR4CPP_STATIC
   DEP_FILE = CMakeFiles/Parsertest.dir/antlr/grammarVMParser.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -F/Library/Developer/CommandLineTools/SDKs/MacOSX11.sdk/System/Library/Frameworks  -std=gnu++17
-  INCLUDES = -I/usr/local/include/antlr4-runtime -I/Users/marina.romashkova/abstract-vm/antlr
+  INCLUDES = -I/usr/local/include/antlr4-runtime -I/usr/local/include -I/Users/marina.romashkova/abstract-vm/antlr
   OBJECT_DIR = CMakeFiles/Parsertest.dir
   OBJECT_FILE_DIR = CMakeFiles/Parsertest.dir/antlr
 
@@ -80,8 +80,8 @@ build CMakeFiles/Parsertest.dir/antlr/grammarVMParser.cpp.o: CXX_COMPILER__Parse
 
 build Parsertest: CXX_EXECUTABLE_LINKER__Parsertest_Debug CMakeFiles/Parsertest.dir/main.cpp.o CMakeFiles/Parsertest.dir/antlr/grammarVMLexer.cpp.o CMakeFiles/Parsertest.dir/antlr/grammarVMParser.cpp.o | /usr/local/lib/libantlr4-runtime.4.10.1.dylib
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk
-  LINK_LIBRARIES = /usr/local/lib/libantlr4-runtime.4.10.1.dylib  -framework  CoreFoundation
-  LINK_PATH = -F/Library/Developer/CommandLineTools/SDKs/MacOSX11.sdk/System/Library/Frameworks
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  /usr/local/lib/libantlr4-runtime.4.10.1.dylib  -framework  CoreFoundation
+  LINK_PATH = -F/Library/Developer/CommandLineTools/SDKs/MacOSX11.sdk/System/Library/Frameworks  -L/usr/local/lib
   OBJECT_DIR = CMakeFiles/Parsertest.dir
   POST_BUILD = :
   PRE_LINK = :
