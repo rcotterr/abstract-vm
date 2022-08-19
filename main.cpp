@@ -29,12 +29,15 @@ int main(int argc, char **argv) {
     std::string file = fileArg.getValue();
     bool useStdInput = stdInput.getValue();
 
+    std::string input_;
     if (file != no_file) {
         std::ifstream t(file);
         std::stringstream buffer;
         buffer << t.rdbuf();
+        input_ = buffer.str();
     } else if (useStdInput) {
         //input std here
+        input_ = "pop\nsub";
     } else {
         std::cout << "Add -h to know usage" << std::endl;
         return 0;
@@ -42,11 +45,7 @@ int main(int argc, char **argv) {
 
 
 // Provide the input text in a stream
-//    antlr4::ANTLRInputStream input("pop\nsub");
-    std::ifstream t("/Users/marina.romashkova/abstract-vm/examples/check_test8");
-    std::stringstream buffer;
-    buffer << t.rdbuf();
-    antlr4::ANTLRInputStream input(buffer.str());
+    antlr4::ANTLRInputStream input(input_);
 //    antlr4::ANTLRInputStream input("push int32(42)\n"
 //                                   "push int32(33)\n"
 //                                   "add\n"
