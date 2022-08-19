@@ -89,18 +89,18 @@ int main() {
 
 // Provide the input text in a stream
 //    antlr4::ANTLRInputStream input("pop\nsub");
-    antlr4::ANTLRInputStream input("push push int32(2)\n"
+    antlr4::ANTLRInputStream input("push int32(2)\n"
                                    "push int32(3)\n"
                                    "add\n"
                                    "assert int32(5)\n"
                                    "dump\n"
                                    "pop\n"
-                                   "dmp\n"
+                                   "dump\n"
                                    "push int32(3)\n"
                                    "push int32(5)\n"
                                    "sub\n"
                                    "dump\n"
-                                   "push push int32(3)\n"
+                                   "push int32(3)\n"
                                    "mul\n"
                                    "dump\n"
                                    "push int8(12)\n"
