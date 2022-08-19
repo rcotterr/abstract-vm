@@ -24,6 +24,9 @@ public:
         this->_stack.push_back(operand);
     };
     void assert_(IOperand const * operand) {
+        if (this->_stack.empty()) {
+            throw LessThanRequiredValueException();
+        }
         IOperand const * elem = this->_stack.back();
         eOperandType elem_type = elem->getType();
         eOperandType operand_type = operand->getType();
@@ -56,7 +59,7 @@ public:
     void add() {
         std::cout << "add method " << std::endl;
         if (this->_stack.size() < 2) {
-            throw std::exception();
+            throw LessThanRequiredValueException();
         }
         IOperand const * first = this->_stack.back();
         std::cout << first->toString();
@@ -73,7 +76,7 @@ public:
     void sub() {
         std::cout << "sub method " << std::endl;
         if (this->_stack.size() < 2) {
-            throw std::exception();
+            throw LessThanRequiredValueException();
         }
         IOperand const * first = this->_stack.back();
         std::cout << first->toString();
@@ -89,7 +92,7 @@ public:
     void mul() {
         std::cout << "mul method " << std::endl;
         if (this->_stack.size() < 2) {
-            throw std::exception();
+            throw LessThanRequiredValueException();
         }
         IOperand const * first = this->_stack.back();
         std::cout << first->toString();
@@ -105,7 +108,7 @@ public:
     void div() {
         std::cout << "div method " << std::endl;
         if (this->_stack.size() < 2) {
-            throw std::exception();
+            throw LessThanRequiredValueException();
         }
         IOperand const * first = this->_stack.back();
         std::cout << first->toString();
@@ -124,7 +127,7 @@ public:
     void mod() {
         std::cout << "mod method " << std::endl;
         if (this->_stack.size() < 2) {
-            throw std::exception();
+            throw LessThanRequiredValueException();
         }
         IOperand const * first = this->_stack.back();
         std::cout << first->toString();
@@ -143,7 +146,7 @@ public:
     void print() {
         std::cout << "print method " << std::endl;
         if (this->_stack.size() < 1) {
-            throw std::exception();
+            throw LessThanRequiredValueException();
         }
         IOperand const * first = this->_stack.back();
         std::cout << first->toString();
@@ -280,6 +283,14 @@ public:
         virtual const char * what() const throw()
         {
             return ("Instruction pop on empty stack");
+        }
+    };
+    class LessThanRequiredValueException : public std::exception
+    {
+    public:
+        virtual const char * what() const throw()
+        {
+            return ("Less than required num values in stack");
         }
     };
 };
