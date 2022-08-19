@@ -1,12 +1,8 @@
-//
-// Created by Marina Romashkova on 17.08.2022.
-//
 #include <iostream>
 #include <vector>
+//#include <boost/lexical_cast.hpp>
 #include "Operand.hpp"
 #include "Factory.hpp"
-//#include "Factory.cpp"
-//#include "Operand.cpp"
 
 #ifndef ABSTRACT_VM_ABSTRACTVM_H
 #define ABSTRACT_VM_ABSTRACTVM_H
@@ -20,7 +16,6 @@ private:
 public:
     abstractVM() {
         this->_factory = Factory();// TO DO check memory lick
-        this->_factory = Factory();// TO DO check memory lick
     };
     ~abstractVM() {
         this->_stack.clear();// TO DO check memory lick
@@ -28,8 +23,6 @@ public:
     void push(IOperand const * operand) {
         std::cout << "push method " << std::endl;
         this->_stack.push_back(operand);
-//        (this->_stack).push_back(operand);
-        return;
     };
     void assert_(IOperand const * operand) {
         IOperand const * elem = this->_stack.back();
@@ -171,24 +164,56 @@ public:
 
 
     void processInstruction(std::string cmd, std::string type, std::string num) {
-        eOperandType new_type; //TO DO check valid type
-        if (type == "int8") {
-            new_type = INT8;
-        }
-        else if (type == "int16") {
-            new_type = INT16;
-        }
-        else if (type == "int32") {
-            new_type = INT32;
+        eOperandType new_type;
+
+        double value = std::stod(num);
+        if (type.find("int") != -1 ) {
+//            int value = std::stoi(num);
+            if (type.find('8') != -1 ) {
+                new_type = INT8;
+                if (!(value <= std::numeric_limits<std::int8_t>::max()
+                      && value >= std::numeric_limits<std::int8_t>::min())) {
+                    throw std::exception();
+                }
+            }
+            else if (type.find("16") != -1 ) {
+                new_type = INT16;
+                if (!(value <= std::numeric_limits<std::int16_t>::max()
+                      && value >= std::numeric_limits<std::int16_t>::min())) {
+                    throw std::exception();
+                }
+            }
+            else if (type.find("32") != -1 ) {
+                new_type = INT32;
+                if (!(value <= std::numeric_limits<std::int32_t>::max()
+                      && value >= std::numeric_limits<std::int32_t>::min())) {
+                    throw std::exception();
+                }
+            }
+            else {
+                std::cout << "error!" << std::endl;
+                throw std::exception();
+            }
         }
         else if (type == "float") {
             new_type = FLOAT;
+            if (!(value <= std::numeric_limits<std::float_t>::max()
+                  && value >= std::numeric_limits<std::float_t>::lowest())) {
+                std::cout << std::numeric_limits<std::float_t>::lowest() << std::endl;
+                float check = std::numeric_limits<std::float_t>::lowest();
+                if (value <= (float)check) {
+                    std::cout << check << " " << value << std::endl;
+                }
+                throw std::exception();
+            }
+//            float value = std::stof(num);
         }
         else if (type == "double") {
             new_type = DOUBLE;
         }
         else {
             std::cout << "error!" << std::endl;
+            throw std::exception();
         }
 
         IOperand const * factory_operand = this->_factory.createOperand(new_type, num);
