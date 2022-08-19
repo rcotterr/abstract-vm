@@ -89,18 +89,18 @@ int main() {
 
 // Provide the input text in a stream
 //    antlr4::ANTLRInputStream input("pop\nsub");
-    antlr4::ANTLRInputStream input("push int32(2)\n"
+    antlr4::ANTLRInputStream input("push push int32(2)\n"
                                    "push int32(3)\n"
                                    "add\n"
                                    "assert int32(5)\n"
                                    "dump\n"
                                    "pop\n"
-                                   "dump\n"
+                                   "dmp\n"
                                    "push int32(3)\n"
                                    "push int32(5)\n"
                                    "sub\n"
                                    "dump\n"
-                                   "push int32(3)\n"
+                                   "push push int32(3)\n"
                                    "mul\n"
                                    "dump\n"
                                    "push int8(12)\n"
@@ -126,15 +126,40 @@ int main() {
     // Create a lexer from the input
     grammarVMLexer  lexer(&input);
 
+    auto err = lexer.getNumberOfSyntaxErrors();
+    std::cout << "err " << err << std::endl;
+
+    auto err2 = lexer.getErrorListenerDispatch();
+
+
     // Create a token stream from the lexer
     antlr4::CommonTokenStream tokens(&lexer);
 
     // Create a parser from the token stream
     grammarVMParser parser(&tokens);
 
+    auto err_ = parser.getNumberOfSyntaxErrors();
+    std::cout << "err " << err_ << std::endl;
+
     grammarVMParser::ProgContext* prog = parser.prog();
     // Display the parse tree
     std::cout << prog->toStringTree() << std::endl;
+
+    auto err__ = parser.getNumberOfSyntaxErrors();
+    std::cout << "err " << err__ << std::endl;
+
+    auto err___ = parser.getRuleInvocationStack();
+//    std::cout << "err " << err___ << std::endl;
+
+    auto err5 = parser.getErrorHandler();
+//    std::cout << "synt errors: " << std::endl;
+    err5->reportMatch(&parser);
+//    std::cout << "err " << err___ << std::endl;
+
+    if (err__ != 0) {
+        std::cout << "Some errors occurred " << std::endl;
+        return 1;
+    }
 
     grammarVMMyVisitor visitor;
     try {
@@ -148,7 +173,7 @@ int main() {
         std::cout << e.what() << std::endl;
     }
     catch (std::exception& e) {
-        std::cout << "No exit method" << std::endl;
+        std::cout << "No exit instruction" << std::endl;
     }
 
     return 0;
