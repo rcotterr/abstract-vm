@@ -1,6 +1,6 @@
 grammar grammarVM;
 
-prog : SEP* instr (SEP instr)* EOF
+prog : SEP* instr SEP* (SEP+ instr)* SEP* EOF
     ;
 
 instr :
@@ -53,7 +53,7 @@ CLOSE_BRACKET : ')';
 
 //Hidden channels
 SINGLE_LINE_COMMENT
-    : ';' ~[\n]* '\n' -> channel(HIDDEN)
+    : ';' ~[\n]* -> channel(HIDDEN)
     ;
 
 SPACES

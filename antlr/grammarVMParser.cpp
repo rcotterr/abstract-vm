@@ -59,17 +59,22 @@ void grammarvmParserInitialize() {
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,27,38,2,0,7,0,2,1,7,1,2,2,7,2,1,0,5,0,8,8,0,10,0,12,0,11,9,0,1,0,
-  	1,0,1,0,5,0,16,8,0,10,0,12,0,19,9,0,1,0,1,0,1,1,1,1,1,1,3,1,26,8,1,1,
-  	2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,36,8,2,1,2,0,0,3,0,2,4,0,0,38,0,9,1,
-  	0,0,0,2,25,1,0,0,0,4,35,1,0,0,0,6,8,5,23,0,0,7,6,1,0,0,0,8,11,1,0,0,0,
-  	9,7,1,0,0,0,9,10,1,0,0,0,10,12,1,0,0,0,11,9,1,0,0,0,12,17,3,2,1,0,13,
-  	14,5,23,0,0,14,16,3,2,1,0,15,13,1,0,0,0,16,19,1,0,0,0,17,15,1,0,0,0,17,
-  	18,1,0,0,0,18,20,1,0,0,0,19,17,1,0,0,0,20,21,5,0,0,1,21,1,1,0,0,0,22,
-  	23,5,1,0,0,23,26,3,4,2,0,24,26,5,2,0,0,25,22,1,0,0,0,25,24,1,0,0,0,26,
-  	3,1,0,0,0,27,28,5,3,0,0,28,29,5,24,0,0,29,30,5,21,0,0,30,36,5,25,0,0,
-  	31,32,5,4,0,0,32,33,5,24,0,0,33,34,5,22,0,0,34,36,5,25,0,0,35,27,1,0,
-  	0,0,35,31,1,0,0,0,36,5,1,0,0,0,4,9,17,25,35
+  	4,1,27,54,2,0,7,0,2,1,7,1,2,2,7,2,1,0,5,0,8,8,0,10,0,12,0,11,9,0,1,0,
+  	1,0,5,0,15,8,0,10,0,12,0,18,9,0,1,0,4,0,21,8,0,11,0,12,0,22,1,0,5,0,26,
+  	8,0,10,0,12,0,29,9,0,1,0,5,0,32,8,0,10,0,12,0,35,9,0,1,0,1,0,1,1,1,1,
+  	1,1,3,1,42,8,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,52,8,2,1,2,0,0,3,0,
+  	2,4,0,0,57,0,9,1,0,0,0,2,41,1,0,0,0,4,51,1,0,0,0,6,8,5,23,0,0,7,6,1,0,
+  	0,0,8,11,1,0,0,0,9,7,1,0,0,0,9,10,1,0,0,0,10,12,1,0,0,0,11,9,1,0,0,0,
+  	12,16,3,2,1,0,13,15,5,23,0,0,14,13,1,0,0,0,15,18,1,0,0,0,16,14,1,0,0,
+  	0,16,17,1,0,0,0,17,27,1,0,0,0,18,16,1,0,0,0,19,21,5,23,0,0,20,19,1,0,
+  	0,0,21,22,1,0,0,0,22,20,1,0,0,0,22,23,1,0,0,0,23,24,1,0,0,0,24,26,3,2,
+  	1,0,25,20,1,0,0,0,26,29,1,0,0,0,27,25,1,0,0,0,27,28,1,0,0,0,28,33,1,0,
+  	0,0,29,27,1,0,0,0,30,32,5,23,0,0,31,30,1,0,0,0,32,35,1,0,0,0,33,31,1,
+  	0,0,0,33,34,1,0,0,0,34,36,1,0,0,0,35,33,1,0,0,0,36,37,5,0,0,1,37,1,1,
+  	0,0,0,38,39,5,1,0,0,39,42,3,4,2,0,40,42,5,2,0,0,41,38,1,0,0,0,41,40,1,
+  	0,0,0,42,3,1,0,0,0,43,44,5,3,0,0,44,45,5,24,0,0,45,46,5,21,0,0,46,52,
+  	5,25,0,0,47,48,5,4,0,0,48,49,5,24,0,0,49,50,5,22,0,0,50,52,5,25,0,0,51,
+  	43,1,0,0,0,51,47,1,0,0,0,52,5,1,0,0,0,7,9,16,22,27,33,41,51
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -182,6 +187,7 @@ grammarVMParser::ProgContext* grammarVMParser::prog() {
     exitRule();
   });
   try {
+    size_t alt;
     enterOuterAlt(_localctx, 1);
     setState(9);
     _errHandler->sync(this);
@@ -195,19 +201,51 @@ grammarVMParser::ProgContext* grammarVMParser::prog() {
     }
     setState(12);
     instr();
-    setState(17);
+    setState(16);
+    _errHandler->sync(this);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 1, _ctx);
+    while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
+      if (alt == 1) {
+        setState(13);
+        match(grammarVMParser::SEP); 
+      }
+      setState(18);
+      _errHandler->sync(this);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 1, _ctx);
+    }
+    setState(27);
+    _errHandler->sync(this);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx);
+    while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
+      if (alt == 1) {
+        setState(20); 
+        _errHandler->sync(this);
+        _la = _input->LA(1);
+        do {
+          setState(19);
+          match(grammarVMParser::SEP);
+          setState(22); 
+          _errHandler->sync(this);
+          _la = _input->LA(1);
+        } while (_la == grammarVMParser::SEP);
+        setState(24);
+        instr(); 
+      }
+      setState(29);
+      _errHandler->sync(this);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx);
+    }
+    setState(33);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while (_la == grammarVMParser::SEP) {
-      setState(13);
+      setState(30);
       match(grammarVMParser::SEP);
-      setState(14);
-      instr();
-      setState(19);
+      setState(35);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
-    setState(20);
+    setState(36);
     match(grammarVMParser::EOF);
    
   }
@@ -275,21 +313,21 @@ grammarVMParser::InstrContext* grammarVMParser::instr() {
     exitRule();
   });
   try {
-    setState(25);
+    setState(41);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case grammarVMParser::CMD_VALUE: {
         enterOuterAlt(_localctx, 1);
-        setState(22);
+        setState(38);
         match(grammarVMParser::CMD_VALUE);
-        setState(23);
+        setState(39);
         value();
         break;
       }
 
       case grammarVMParser::CMD: {
         enterOuterAlt(_localctx, 2);
-        setState(24);
+        setState(40);
         match(grammarVMParser::CMD);
         break;
       }
@@ -375,31 +413,31 @@ grammarVMParser::ValueContext* grammarVMParser::value() {
     exitRule();
   });
   try {
-    setState(35);
+    setState(51);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case grammarVMParser::INT_TYPE: {
         enterOuterAlt(_localctx, 1);
-        setState(27);
+        setState(43);
         match(grammarVMParser::INT_TYPE);
-        setState(28);
+        setState(44);
         match(grammarVMParser::OPEN_BRACKET);
-        setState(29);
+        setState(45);
         match(grammarVMParser::N);
-        setState(30);
+        setState(46);
         match(grammarVMParser::CLOSE_BRACKET);
         break;
       }
 
       case grammarVMParser::FLOAT_TYPE: {
         enterOuterAlt(_localctx, 2);
-        setState(31);
+        setState(47);
         match(grammarVMParser::FLOAT_TYPE);
-        setState(32);
+        setState(48);
         match(grammarVMParser::OPEN_BRACKET);
-        setState(33);
+        setState(49);
         match(grammarVMParser::Z);
-        setState(34);
+        setState(50);
         match(grammarVMParser::CLOSE_BRACKET);
         break;
       }
