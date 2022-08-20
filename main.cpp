@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
     std::string input_;
     if (file != no_file) {
-        std::ifstream t(file);
+        std::ifstream t(file); //TO DO check no such file
         std::stringstream buffer;
         buffer << t.rdbuf();
         input_ = buffer.str();
@@ -43,7 +43,9 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-
+//    try {
+//
+//    }
 // Provide the input text in a stream
     antlr4::ANTLRInputStream input(input_);
 //    antlr4::ANTLRInputStream input("push int32(42)\n"

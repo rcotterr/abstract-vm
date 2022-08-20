@@ -6,6 +6,7 @@
 
 #include "antlr4-runtime.h"
 #include "grammarVMVisitor.h"
+#include "abstractVM.cpp"
 #include "abstractVM.h"
 
 
