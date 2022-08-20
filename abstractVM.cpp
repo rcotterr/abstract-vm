@@ -5,7 +5,11 @@ abstractVM::abstractVM() {
 }
 
 abstractVM::~abstractVM() {
-    this->_stack.clear();// TO DO check memory lick
+    for (auto i: this->_stack) {
+        this->_stack.pop_back();
+        delete i;
+    }
+    this->_stack.clear();
 }
 
 void abstractVM::push(IOperand const * operand) {
@@ -34,7 +38,9 @@ void abstractVM::pop() {
     if (this->_stack.empty()) {
         throw PopEmptyStack();
     }
+    IOperand const * tmp = this->_stack.back();
     this->_stack.pop_back();
+    delete tmp;
 }
 
 void abstractVM::dump() {
@@ -63,6 +69,8 @@ void abstractVM::add() {
     this->_stack.pop_back();
 
     IOperand const * result = *second + *first;
+    delete second;
+    delete first;
     this->_stack.push_back(result);
 
 }
@@ -77,6 +85,8 @@ void abstractVM::sub() {
     this->_stack.pop_back();
 
     IOperand const * result = *second - *first;
+    delete second;
+    delete first;
     this->_stack.push_back(result);
 }
 
@@ -90,6 +100,8 @@ void abstractVM::mul() {
     this->_stack.pop_back();
 
     IOperand const * result = *second * *first;
+    delete second;
+    delete first;
     this->_stack.push_back(result);
 }
 
@@ -106,6 +118,8 @@ void abstractVM::div() {
         throw ZeroDivision();
     }
     IOperand const * result = *second / *first;
+    delete second;
+    delete first;
     this->_stack.push_back(result);
 }
 
@@ -122,6 +136,8 @@ void abstractVM::mod() {
         throw ZeroDivision();
     }
     IOperand const * result = *second % *first;
+    delete second;
+    delete first;
     this->_stack.push_back(result);
 }
 
@@ -193,6 +209,9 @@ void abstractVM::processInstruction(std::string cmd, std::string type, std::stri
         this->push(factory_operand);
     } else if (cmd == "assert") {
         this->assert_(factory_operand);
+        delete factory_operand;
+    } else {
+        delete factory_operand;
     }
 }
 
