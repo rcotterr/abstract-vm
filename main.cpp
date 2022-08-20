@@ -10,7 +10,7 @@
 #include "antlr4-runtime.h"
 #include "antlr/grammarVMLexer.h"
 #include "antlr/grammarVMParser.h"
-#include "grammarVMMyVisitor.h"
+#include "AbstractVMVisitor.h"
 #include "abstractVM.h"
 
 
@@ -156,7 +156,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    grammarVMMyVisitor visitor;
+    AbstractVMVisitor visitor;
     try {
         prog->accept(&visitor);
         throw std::exception(); //TO DO move exception to some class with normal name

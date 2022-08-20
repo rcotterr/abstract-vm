@@ -12,7 +12,7 @@ class Operand : public IOperand
     private:
         eOperandType _type;
         std::string _value; //TO DO make reference not pointer
-        double _num;
+//        double _num;
 
     public:
         Operand();
@@ -25,19 +25,6 @@ class Operand : public IOperand
         IOperand const * operator/( IOperand const &rhs ) const;
         IOperand const * operator%( IOperand const &rhs ) const;
         std::string const & toString() const;
-//        ~Operand();
-//        Array<T>(unsigned int n) {
-//            this->_len = n;
-//            this->_arr = new T[this->_len];
-//            return;
-//        };
-//        MutantStack & operator=(MutantStack const & src);
-//        MutantStack( const MutantStack<T, Container> & src);
-//
-//        typedef typename std::stack<T>::container_type::iterator iterator;
-//        iterator begin();
-//        iterator end();
-
 
 };
 

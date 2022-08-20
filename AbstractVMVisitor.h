@@ -1,6 +1,3 @@
-
-// Generated from grammarVM.g4 by ANTLR 4.10.1
-
 #pragma once
 
 
@@ -10,16 +7,12 @@
 #include "abstractVM.h"
 
 
-/**
- * This class provides an empty implementation of grammarVMVisitor, which can be
- * extended to create a visitor which only needs to handle a subset of the available methods.
- */
-class  grammarVMMyVisitor : public grammarVMVisitor {
+class  AbstractVMVisitor : public grammarVMVisitor {
 private:
     abstractVM _vm;
 
 public:
-    grammarVMMyVisitor(){
+    AbstractVMVisitor(){
         this->_vm = abstractVM();
     };
 
