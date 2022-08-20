@@ -24,17 +24,24 @@ int main(int argc, char **argv) {
 
     TCLAP::CmdLine cmd("Abstract VM", ' ', "1");
     TCLAP::ValueArg<std::string> fileArg("f","file","File to parse", false,no_file,"string");
+    TCLAP::ValueArg<std::string> outputFileArg("o","output","Output to file", false,no_file,"string");
     TCLAP::SwitchArg stdInput("i","input","Use standard input", cmd, false);
 
     cmd.add( fileArg);
+    cmd.add( outputFileArg);
     cmd.parse(argc, argv);
 
     std::string file = fileArg.getValue();
+    std::string output_file = outputFileArg.getValue();
     bool useStdInput = stdInput.getValue();
+
+    if (output_file != no_file) {
+        freopen(output_file.c_str(),"w",stdout);
+    }
 
     std::string input_;
     if (file != no_file) {
-        std::ifstream t(file); //TO DO check no such file
+        std::ifstream t(file);
         if (!t) {
             std::cout << "Failed to open file\n";
             return 1;
