@@ -41,11 +41,11 @@ int main(int argc, char **argv) {
 
     std::string input_;
     if (file != no_file) {
-        std::ifstream t(file);
-        if (!t) {
+        if(!std::filesystem::is_regular_file(file)) {
             std::cout << "Failed to open file\n";
             return 1;
         }
+        std::ifstream t(file);
         std::stringstream buffer;
         buffer << t.rdbuf();
         input_ = buffer.str();
