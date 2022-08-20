@@ -39,8 +39,12 @@ int main(int argc, char **argv) {
         buffer << t.rdbuf();
         input_ = buffer.str();
     } else if (useStdInput) {
-        //TO DO input std here
-        input_ = "pop\nsub";
+        for (std::string line; std::getline(std::cin, line);) {
+            if (line == ";;") {
+                break;
+            }
+            input_ += line + "\n";
+        }
     } else {
         std::cout << "Add -h to know usage" << std::endl;
         return 0;
