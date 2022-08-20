@@ -45,6 +45,14 @@ void abstractVM::dump() {
     }
 }
 
+void abstractVM::rdump() {
+    for (auto it = this->_stack.begin(); it != this->_stack.end(); ++it)
+    {
+        double elem_num = std::stod((*it)->toString());
+        std::cout << elem_num << std::endl;
+    }
+}
+
 void abstractVM::add() {
     if (this->_stack.size() < 2) {
         throw LessThanRequiredValueException();
@@ -193,6 +201,8 @@ void abstractVM::processInstruction(std::string cmd) {
         this->pop();
     } else if (cmd == "dump") {
         this->dump();
+    } else if (cmd == "rdump") {
+        this->rdump();
     }else if (cmd == "add") {
         this->add();
     }

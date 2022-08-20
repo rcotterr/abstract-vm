@@ -14,9 +14,9 @@ public:
   enum {
     CMD_VALUE = 1, CMD = 2, INT_TYPE = 3, FLOAT_TYPE = 4, INT8 = 5, INT16 = 6, 
     INT32 = 7, DOUBLE = 8, FLOAT = 9, PUSH = 10, ASSERT = 11, POP = 12, 
-    DUMP = 13, ADD = 14, SUB = 15, MUL = 16, DIV = 17, MOD = 18, PRINT = 19, 
-    EXIT = 20, N = 21, Z = 22, SEP = 23, OPEN_BRACKET = 24, CLOSE_BRACKET = 25, 
-    SINGLE_LINE_COMMENT = 26, SPACES = 27
+    DUMP = 13, RDUMP = 14, ADD = 15, SUB = 16, MUL = 17, DIV = 18, MOD = 19, 
+    PRINT = 20, EXIT = 21, N = 22, Z = 23, SEP = 24, OPEN_BRACKET = 25, 
+    CLOSE_BRACKET = 26, SINGLE_LINE_COMMENT = 27, SPACES = 28
   };
 
   enum {

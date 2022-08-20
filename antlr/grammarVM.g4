@@ -13,7 +13,7 @@ CMD_VALUE :
     ;
 
 CMD :
-    POP | DUMP | ADD | SUB | MUL | DIV | MOD | PRINT | EXIT
+    POP | DUMP | RDUMP| ADD | SUB | MUL | DIV | MOD | PRINT | EXIT
     ;
 
 value :
@@ -34,6 +34,7 @@ PUSH   : 'push';
 ASSERT : 'assert';
 POP    : 'pop';
 DUMP   : 'dump';
+RDUMP   : 'rdump';
 ADD    : 'add';
 SUB    : 'sub';
 MUL    : 'mul';

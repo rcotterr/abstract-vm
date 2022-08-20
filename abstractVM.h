@@ -22,6 +22,7 @@ public:
     void assert_(IOperand const * operand);
     void pop();
     void dump();
+    void rdump();
     void add();
     void sub();
     void mul();
