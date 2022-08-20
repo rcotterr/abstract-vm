@@ -13,8 +13,8 @@
 #include "AbstractVMVisitor.h"
 #include "AbstractVMVisitor.cpp"
 #include "abstractVM.h"
-#include "InitLexerParser.h"
-#include "InitLexerParser.cpp"
+#include "LexerParserErrors.h"
+#include "LexerParserErrors.cpp"
 
 
 
@@ -46,15 +46,49 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    grammarVMParser::ProgContext* prog;
-    InitLexerParser lexerParser = InitLexerParser();
-    try {
-        prog = lexerParser.init(input_);
-    }
-    catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
-        return 1;
-    }
+//    grammarVMParser::ProgContext* prog;
+//    InitLexerParser lexerParser = InitLexerParser();
+//    try {
+//        // Provide the input text in a stream
+//        antlr4::ANTLRInputStream input(input_);
+//
+//        // Create a lexer from the input
+//        grammarVMLexer  lexer(&input);
+//
+//        // Create a token stream from the lexer
+//        antlr4::CommonTokenStream tokens(&lexer);
+//
+//        // Create a parser from the token stream
+//        grammarVMParser parser(&tokens);
+//
+//    grammarVMParser::ProgContext* prog = parser.prog();
+//
+//        auto errHandler = parser.getErrorHandler();
+//        errHandler->reportMatch(&parser);
+//
+//        auto errNum = parser.getNumberOfSyntaxErrors();
+//        std::cout << "err " << errNum << std::endl;
+//        if (errNum != 0) {
+//            std::cout << "Some errors occurred " << std::endl;
+//            return 1;
+//        }
+//    grammarVMParser parser = lexerParser.init(input_);
+//    grammarVMParser::ProgContext* prog = parser.prog();
+//    InitLexerParser lexerParser = InitLexerParser();
+//    grammarVMParser::ProgContext* prog = lexerParser.init(input_);
+//        grammarVMParser::ProgContext* prog = lexerParser.init(input_);
+//    }
+//    catch (std::exception& e) {
+//
+//    }
+
+//    try {
+//        prog = lexerParser.init(input_);
+//    }
+//    catch (std::exception& e) {
+//        std::cout << e.what() << std::endl;
+//        return 1;
+//    }
 // Provide the input text in a stream
 //    antlr4::ANTLRInputStream input(input_);
 //    antlr4::ANTLRInputStream input("push int32(42)\n"
@@ -127,20 +161,37 @@ int main(int argc, char **argv) {
 ////                                   "dump\n"
 ////                                   "exit");
 
-
-    AbstractVMVisitor visitor;
     try {
+        // Provide the input text in a stream
+        antlr4::ANTLRInputStream input(input_);
+
+        // Create a lexer from the input
+        grammarVMLexer  lexer(&input);
+
+        // Create a token stream from the lexer
+        antlr4::CommonTokenStream tokens(&lexer);
+
+        // Create a parser from the token stream
+        grammarVMParser parser(&tokens);
+
+        grammarVMParser::ProgContext* prog = parser.prog();
+
+        LexerParserErrors lexerParserErrors = LexerParserErrors();
+        lexerParserErrors.processErrors(&parser);
+
+        AbstractVMVisitor visitor;
         prog->accept(&visitor);
         throw std::exception(); //TO DO move exception to some class with normal name
     }
-    catch (abstractVM::ZeroDivision& e) {
-        std::cout << e.what() << std::endl;
-    }
-    catch (abstractVM::ExitProgram& e) {
-        std::cout << e.what() << std::endl;
-    }
+//    catch (abstractVM::ZeroDivision& e) {
+//        std::cout << e.what() << std::endl;
+//    }
+//    catch (abstractVM::ExitProgram& e) {
+//        std::cout << e.what() << std::endl;
+//    }
     catch (std::exception& e) {
         std::cout << e.what() << std::endl;
+//        return 1;
 //        std::cout << "No exit instruction" << e.what() <<std::endl;
     }
 
