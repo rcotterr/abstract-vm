@@ -15,7 +15,7 @@ LIBS=/usr/local/lib/libantlr4-runtime.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(OBJS_ANTLR) $(INC) $(INC_ANTLR)
-	$(CC) $(CFLAGS) $(OBJS) $(OBJS_ANTLR) $(LIBS) -o $(NAME) -I /usr/local/include/antlr4-runtime -I antlr
+	$(CC) $(CFLAGS) $(OBJS) $(OBJS_ANTLR) $(LIBS) -o $(NAME)
 
 %.o: %.cpp $(INC) $(INC_ANTLR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I /usr/local/include/antlr4-runtime -I antlr
