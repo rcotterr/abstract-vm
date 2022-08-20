@@ -66,6 +66,14 @@ public:
             return ("Instruction pop on empty stack");
         }
     };
+    class PrintInvalidChar : public std::exception
+    {
+    public:
+        virtual const char * what() const throw()
+        {
+            return ("Invalid type for print char");
+        }
+    };
     class LessThanRequiredValueException : public std::exception
     {
     public:
@@ -87,7 +95,7 @@ public:
     class OutOfRangeException : public std::runtime_error
     {
     public:
-        OutOfRangeException(const std::string &s) : runtime_error("Overflow exception with value " + s) {}
+        OutOfRangeException(const std::string &s) : runtime_error("Out of range exception " + s) {}
     };
     class NoValidExit : public std::exception
     {

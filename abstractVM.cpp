@@ -111,7 +111,7 @@ void abstractVM::mod() {
     this->_stack.pop_back();
 
     if (std::stod(first->toString()) == 0) {
-        throw std::exception();
+        throw ZeroDivision();
     }
     IOperand const * result = *second % *first;
     this->_stack.push_back(result);
@@ -124,10 +124,11 @@ void abstractVM::print() {
     IOperand const * first = this->_stack.back();
     eOperandType elem_type = first->getType();
     if (elem_type != INT8) {
-        throw std::exception();
+        throw PrintInvalidChar();
     }
     int num = std::stoi(first->toString());
     char c = static_cast<char>(num);
+    std::cout << c << std::endl;
 }
 
 void abstractVM::exit() {
