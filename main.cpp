@@ -35,6 +35,10 @@ int main(int argc, char **argv) {
     std::string input_;
     if (file != no_file) {
         std::ifstream t(file); //TO DO check no such file
+        if (!t) {
+            std::cout << "Failed to open file\n";
+            return 1;
+        }
         std::stringstream buffer;
         buffer << t.rdbuf();
         input_ = buffer.str();
