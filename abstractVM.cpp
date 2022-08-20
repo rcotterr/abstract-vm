@@ -9,7 +9,6 @@ abstractVM::~abstractVM() {
 }
 
 void abstractVM::push(IOperand const * operand) {
-    std::cout << "push method " << std::endl;
     this->_stack.push_back(operand);
 }
 
@@ -32,16 +31,13 @@ void abstractVM::assert_(IOperand const * operand) {
 }
 
 void abstractVM::pop() {
-    std::cout << "pop method before" << this->_stack.size() << std::endl;
     if (this->_stack.empty()) {
         throw PopEmptyStack();
     }
     this->_stack.pop_back();
-    std::cout << "pop method after" << this->_stack.size() << std::endl;
 }
 
 void abstractVM::dump() {
-    std::cout << "dump method " << std::endl; //TO DO set precision in dump
     for (auto it = this->_stack.rbegin(); it != this->_stack.rend(); ++it)
     {
         double elem_num = std::stod((*it)->toString());
@@ -50,115 +46,91 @@ void abstractVM::dump() {
 }
 
 void abstractVM::add() {
-    std::cout << "add method " << std::endl;
     if (this->_stack.size() < 2) {
         throw LessThanRequiredValueException();
     }
     IOperand const * first = this->_stack.back();
-    std::cout << first->toString();
     this->_stack.pop_back();
     IOperand const * second = this->_stack.back();
-    std::cout << second->toString() << std::endl;
     this->_stack.pop_back();
 
     IOperand const * result = *second + *first;
-    std::cout << result->toString() << std::endl;
     this->_stack.push_back(result);
 
 }
 
 void abstractVM::sub() {
-    std::cout << "sub method " << std::endl;
     if (this->_stack.size() < 2) {
         throw LessThanRequiredValueException();
     }
     IOperand const * first = this->_stack.back();
-    std::cout << first->toString();
     this->_stack.pop_back();
     IOperand const * second = this->_stack.back();
-    std::cout << second->toString() << std::endl;
     this->_stack.pop_back();
 
     IOperand const * result = *second - *first;
-    std::cout << result->toString() << std::endl;
     this->_stack.push_back(result);
 }
 
 void abstractVM::mul() {
-    std::cout << "mul method " << std::endl;
     if (this->_stack.size() < 2) {
         throw LessThanRequiredValueException();
     }
     IOperand const * first = this->_stack.back();
-    std::cout << first->toString();
     this->_stack.pop_back();
     IOperand const * second = this->_stack.back();
-    std::cout << second->toString() << std::endl;
     this->_stack.pop_back();
 
     IOperand const * result = *second * *first;
-    std::cout << result->toString() << std::endl;
     this->_stack.push_back(result);
 }
 
 void abstractVM::div() {
-    std::cout << "div method " << std::endl;
     if (this->_stack.size() < 2) {
         throw LessThanRequiredValueException();
     }
     IOperand const * first = this->_stack.back();
-    std::cout << first->toString();
     this->_stack.pop_back();
     IOperand const * second = this->_stack.back();
-    std::cout << second->toString() << std::endl;
     this->_stack.pop_back();
 
     if (std::stod(first->toString()) == 0) {
         throw ZeroDivision();
     }
     IOperand const * result = *second / *first;
-    std::cout << result->toString() << std::endl;
     this->_stack.push_back(result);
 }
 
 void abstractVM::mod() {
-    std::cout << "mod method " << std::endl;
     if (this->_stack.size() < 2) {
         throw LessThanRequiredValueException();
     }
     IOperand const * first = this->_stack.back();
-    std::cout << first->toString();
     this->_stack.pop_back();
     IOperand const * second = this->_stack.back();
-    std::cout << second->toString() << std::endl;
     this->_stack.pop_back();
 
     if (std::stod(first->toString()) == 0) {
         throw std::exception();
     }
     IOperand const * result = *second % *first;
-    std::cout << result->toString() << std::endl;
     this->_stack.push_back(result);
 }
 
 void abstractVM::print() {
-    std::cout << "print method " << std::endl;
     if (this->_stack.size() < 1) {
         throw LessThanRequiredValueException();
     }
     IOperand const * first = this->_stack.back();
-    std::cout << first->toString();
     eOperandType elem_type = first->getType();
     if (elem_type != INT8) {
         throw std::exception();
     }
     int num = std::stoi(first->toString());
     char c = static_cast<char>(num);
-    std::cout << c << std::endl;
 }
 
 void abstractVM::exit() {
-    std::cout << "exit method " << std::endl;
     throw ExitProgram();
 }
 

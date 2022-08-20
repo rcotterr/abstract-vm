@@ -11,8 +11,7 @@ class Operand : public IOperand
 {
     private:
         eOperandType _type;
-        std::string _value; //TO DO make reference not pointer
-//        double _num;
+        std::string _value;
 
     public:
         Operand();
