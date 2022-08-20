@@ -20,7 +20,7 @@ public:
     public:
         virtual const char * what() const throw()
         {
-            return ("Errors with lexer/parser occurred");
+            return ("Lexical/syntactic errors occurred");
         }
     };
 
