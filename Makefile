@@ -1,4 +1,4 @@
-NAME = a.out
+NAME = avm
 
 CC = clang++
 CFLAGS = -std=c++17 -Wall -Wextra -Werror
@@ -6,7 +6,7 @@ CFLAGS = -std=c++17 -Wall -Wextra -Werror
 INC = $(wildcard *.hpp *.h)
 INC_ANTLR = $(wildcard antlr/*.h)
 SRCS = main.cpp
-SRCS_VM = Operand.cpp
+SRCS_VM = AbstractVMVisitor.cpp Factory.cpp LexerParserErrors.cpp Operand.cpp
 SRCS_ANTLR = $(wildcard antlr/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 OBJS_ANTLR = $(SRCS_ANTLR:.cpp=.o)
