@@ -18,7 +18,7 @@ class Operand : public IOperand
         Operand();
         Operand(eOperandType type, std::string const &value);
         eOperandType getType() const;
-//        double getNum() const;
+        int getPrecision() const;
         IOperand const * operator+( IOperand const &rhs ) const;
         IOperand const * operator-( IOperand const &rhs ) const;
         IOperand const * operator*( IOperand const &rhs ) const;

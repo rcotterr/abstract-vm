@@ -3,9 +3,7 @@
 #include "IOperand.hpp"
 
 template<typename T>
-Operand<T>::Operand() {
-    return;
-}
+Operand<T>::Operand() {}
 
 template<typename T>
 Operand<T>::Operand(eOperandType type, std::string const &value) {
@@ -42,16 +40,10 @@ IOperand const *Operand<T>::operator+(const IOperand &rhs) const {
     if (type < this->_type) {
         type = this->_type;
     }
-
     operand = new Operand<eOperandType>(type, std::to_string(num + rhsNum));
 
     return operand;
 }
-
-//template<class T>
-//double Operand<T>::getNum() const {
-//    return this->_num;
-//}
 
 template<class T>
 std::string const &Operand<T>::toString() const {
@@ -157,4 +149,16 @@ IOperand const *Operand<T>::operator%(const IOperand &rhs) const {
     operand = new Operand<eOperandType>(DOUBLE, std::to_string(res));
 
     return operand;
+}
+
+template<class T>
+int Operand<T>::getPrecision() const {
+    switch (this->_type) {
+        case FLOAT:
+            return 7;
+        case DOUBLE:
+            return 15;
+        default:
+            return 0;
+    }
 }
