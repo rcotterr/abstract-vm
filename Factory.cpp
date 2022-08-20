@@ -1,6 +1,3 @@
-#include <iostream>
-#include <vector>
-
 #include "Factory.hpp"
 #include "Operand.hpp"
 

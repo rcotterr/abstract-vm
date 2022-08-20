@@ -6,6 +6,8 @@
 #include "abstractVM.cpp"
 #include "abstractVM.h"
 
+#ifndef ABSTRACT_VM_VISITOR_ABSTRACTVMVISITOR_H
+# define ABSTRACT_VM_VISITOR_ABSTRACTVMVISITOR_H
 
 class  AbstractVMVisitor : public grammarVMVisitor {
 private:
@@ -20,3 +22,4 @@ public:
 
 };
 
+#endif
