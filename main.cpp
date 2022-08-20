@@ -13,6 +13,8 @@
 #include "AbstractVMVisitor.h"
 #include "AbstractVMVisitor.cpp"
 #include "abstractVM.h"
+#include "InitLexerParser.h"
+#include "InitLexerParser.cpp"
 
 
 
@@ -44,11 +46,17 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-//    try {
-//
-//    }
+    grammarVMParser::ProgContext* prog;
+    InitLexerParser lexerParser = InitLexerParser();
+    try {
+        prog = lexerParser.init(input_);
+    }
+    catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
 // Provide the input text in a stream
-    antlr4::ANTLRInputStream input(input_);
+//    antlr4::ANTLRInputStream input(input_);
 //    antlr4::ANTLRInputStream input("push int32(42)\n"
 //                                   "push int32(33)\n"
 //                                   "add\n"
@@ -119,43 +127,6 @@ int main(int argc, char **argv) {
 ////                                   "dump\n"
 ////                                   "exit");
 
-    // Create a lexer from the input
-    grammarVMLexer  lexer(&input);
-
-    auto err = lexer.getNumberOfSyntaxErrors();
-    std::cout << "err " << err << std::endl;
-
-    auto err2 = lexer.getErrorListenerDispatch();
-
-
-    // Create a token stream from the lexer
-    antlr4::CommonTokenStream tokens(&lexer);
-
-    // Create a parser from the token stream
-    grammarVMParser parser(&tokens);
-
-    auto err_ = parser.getNumberOfSyntaxErrors();
-    std::cout << "err " << err_ << std::endl;
-
-    grammarVMParser::ProgContext* prog = parser.prog();
-    // Display the parse tree
-    std::cout << prog->toStringTree() << std::endl;
-
-    auto err__ = parser.getNumberOfSyntaxErrors();
-    std::cout << "err " << err__ << std::endl;
-
-    auto err___ = parser.getRuleInvocationStack();
-//    std::cout << "err " << err___ << std::endl;
-
-    auto err5 = parser.getErrorHandler();
-//    std::cout << "synt errors: " << std::endl;
-    err5->reportMatch(&parser);
-//    std::cout << "err " << err___ << std::endl;
-
-    if (err__ != 0) {
-        std::cout << "Some errors occurred " << std::endl;
-        return 1;
-    }
 
     AbstractVMVisitor visitor;
     try {
