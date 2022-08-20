@@ -11,6 +11,7 @@
 #include "antlr/grammarVMLexer.h"
 #include "antlr/grammarVMParser.h"
 #include "AbstractVMVisitor.h"
+#include "AbstractVMVisitor.cpp"
 #include "abstractVM.h"
 
 
