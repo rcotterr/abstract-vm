@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <stdexcept>
+#include <exception>
 #include "Operand.hpp"
 #include "Factory.hpp"
 
@@ -71,6 +73,16 @@ public:
         {
             return ("Less than required num values in stack");
         }
+    };
+    class UnderflowException : public std::underflow_error
+    {
+    public:
+        UnderflowException(const std::string &s) : underflow_error("Underflow exception with value " + s) {}
+    };
+    class OverflowException : public std::overflow_error
+    {
+    public:
+        OverflowException(const std::string &s) : overflow_error("Overflow exception with value " + s) {}
     };
 };
 

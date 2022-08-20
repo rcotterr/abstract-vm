@@ -153,7 +153,6 @@ void abstractVM::print() {
         throw std::exception();
     }
     int num = std::stoi(first->toString());
-//        char c = char(num);
     char c = static_cast<char>(num);
     std::cout << c << std::endl;
 }
@@ -167,53 +166,39 @@ void abstractVM::processInstruction(std::string cmd, std::string type, std::stri
     eOperandType new_type;
 
     double value = std::stod(num);
-    if (type.find("int") != -1 ) {
-//            int value = std::stoi(num);
-        if (type.find('8') != -1 ) {
-            new_type = INT8;
-            if (!(value <= std::numeric_limits<std::int8_t>::max()
-                  && value >= std::numeric_limits<std::int8_t>::min())) {
-                throw std::exception();
-            }
+    if (type == "int8") {
+        new_type = INT8;
+        if (value > std::numeric_limits<std::int8_t>::max()) {
+            throw OverflowException(num);
+        } else if (value < std::numeric_limits<std::int8_t>::min()) {
+            throw UnderflowException(num);
         }
-        else if (type.find("16") != -1 ) {
-            new_type = INT16;
-            if (!(value <= std::numeric_limits<std::int16_t>::max()
-                  && value >= std::numeric_limits<std::int16_t>::min())) {
-                throw std::exception();
-            }
+    } else if (type == "int16") {
+        new_type = INT16;
+        if (value > std::numeric_limits<std::int16_t>::max()) {
+            throw OverflowException(num);
+        } else if (value < std::numeric_limits<std::int16_t>::min()) {
+            throw UnderflowException(num);
         }
-        else if (type.find("32") != -1 ) {
-            new_type = INT32;
-            if (!(value <= std::numeric_limits<std::int32_t>::max()
-                  && value >= std::numeric_limits<std::int32_t>::min())) {
-                throw std::exception();
-            }
-        }
-        else {
-            std::cout << "error!" << std::endl;
-            throw std::exception();
+    } else if (type == "int32") {
+        new_type = INT32;
+        if (value > std::numeric_limits<std::int32_t>::max()) {
+            throw OverflowException(num);
+        } else if (value < std::numeric_limits<std::int32_t>::min()) {
+            throw UnderflowException(num);
         }
     }
     else if (type == "float") {
         new_type = FLOAT;
-        if (!(value <= std::numeric_limits<std::float_t>::max()
-              && value >= std::numeric_limits<std::float_t>::lowest())) {
-            std::cout << std::numeric_limits<std::float_t>::lowest() << std::endl;
-            float check = std::numeric_limits<std::float_t>::lowest();
-            if (value <= (float)check) {
-                std::cout << check << " " << value << std::endl;
-            }
-            throw std::exception();
+        if (value > std::numeric_limits<std::float_t>::max()) {
+            throw OverflowException(num);
+        } else if (value < std::numeric_limits<std::float_t>::lowest()) {
+            throw UnderflowException(num);
         }
-//            float value = std::stof(num);
-    }
-    else if (type == "double") {
+    } else if (type == "double") {
         new_type = DOUBLE;
-    }
-    else {
-        std::cout << "error!" << std::endl;
-        throw std::exception();
+    } else {
+        throw std::runtime_error("No valid type");
     }
 
     IOperand const * factory_operand = this->_factory.createOperand(new_type, num);
