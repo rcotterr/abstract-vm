@@ -165,7 +165,13 @@ void abstractVM::exit() {
 void abstractVM::processInstruction(std::string cmd, std::string type, std::string num) {
     eOperandType new_type;
 
-    double value = std::stod(num);
+    double value;
+    try {
+        value = std::stod(num);
+    }
+    catch (const std::out_of_range &e) {
+        throw OutOfRangeException(e.what());
+    }
     if (type == "int8") {
         new_type = INT8;
         if (value > std::numeric_limits<std::int8_t>::max()) {

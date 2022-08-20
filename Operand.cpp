@@ -18,12 +18,10 @@ eOperandType Operand<T>::getType() const {
 
 template<class T>
 IOperand const *Operand<T>::operator+(const IOperand &rhs) const {
-    std::cout << "+ operator called" << std::endl;
-
+    Operand<eOperandType> const * operand;
     const std::string& rhsStr = rhs.toString();
     double rhsNum;
     double num;
-    Operand<eOperandType> const * operand;
 
     try {
         rhsNum = std::stod(rhsStr);

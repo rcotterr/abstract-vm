@@ -84,6 +84,11 @@ public:
     public:
         OverflowException(const std::string &s) : overflow_error("Overflow exception with value " + s) {}
     };
+    class OutOfRangeException : public std::runtime_error
+    {
+    public:
+        OutOfRangeException(const std::string &s) : runtime_error("Overflow exception with value " + s) {}
+    };
     class NoValidExit : public std::exception
     {
     public:
