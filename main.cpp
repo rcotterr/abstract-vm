@@ -181,18 +181,14 @@ int main(int argc, char **argv) {
 
         AbstractVMVisitor visitor;
         prog->accept(&visitor);
-        throw std::exception(); //TO DO move exception to some class with normal name
+        throw abstractVM::NoValidExit();
     }
-//    catch (abstractVM::ZeroDivision& e) {
-//        std::cout << e.what() << std::endl;
-//    }
-//    catch (abstractVM::ExitProgram& e) {
-//        std::cout << e.what() << std::endl;
-//    }
+    catch (abstractVM::ExitProgram& e) {
+        std::cout << e.what() << std::endl;
+    }
     catch (std::exception& e) {
         std::cout << e.what() << std::endl;
-//        return 1;
-//        std::cout << "No exit instruction" << e.what() <<std::endl;
+        return 1;
     }
 
     return 0;

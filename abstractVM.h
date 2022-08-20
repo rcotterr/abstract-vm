@@ -84,6 +84,14 @@ public:
     public:
         OverflowException(const std::string &s) : overflow_error("Overflow exception with value " + s) {}
     };
+    class NoValidExit : public std::exception
+    {
+    public:
+        virtual const char * what() const throw()
+        {
+            return ("No exit instruction");
+        }
+    };
 };
 
 
